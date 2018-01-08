@@ -1,6 +1,6 @@
 # pawn-stdlib
 
-The Pawn Standard Library Package - designed for the [sampctl package management system](http://sampctl.com).
+The Pawn Standard Library Package, not including any files related to SA:MP - designed for the [sampctl package management system](http://sampctl.com).
 
 ## Why?
 
