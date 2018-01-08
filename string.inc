@@ -27,8 +27,12 @@ native strval(const string[]);
 native valstr(dest[], value, bool:pack=false);
 native bool: ispacked(const string[]);
 
-native format(dest[], size=sizeof dest, const format[], {Float,_}:...);
-#define strformat(%0,%1,%2,%3) format(%0,%1,%3)
+// Don't define "format" twice.
+#tryinclude <a_samp>
+#if !defined _samp_included
+	native format(dest[], size=sizeof dest, const format[], {Float,_}:...);
+	#define strformat(%0,%1,%2,%3) format(%0,%1,%3)
+#endif
 
 native uudecode(dest[], const source[], maxlength=sizeof dest);
 native uuencode(dest[], const source[], numbytes, maxlength=sizeof dest);
