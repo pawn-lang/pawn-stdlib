@@ -1,0 +1,6 @@
+{
+    "user": "sampctl",
+    "repo": "pawn-stdlib",
+    "dependencies": ["openmultiplayer/omp-stdlib"],
+    "contributors": ["ITB CompuPhase", "Ron Cain", "James Hendrix"]
+}
