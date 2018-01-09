@@ -226,12 +226,12 @@ native valstr(dest[], value, bool:pack=false);
 /// <returns><b><c>true</c></b> if the string is packed, <b><c>false</c></b> if it's unpacked.</returns>
 native bool: ispacked(const string[]);
 
-// Don't define "format" twice.
-#tryinclude <a_samp>
-#if !defined _samp_included
-	native format(dest[], size=sizeof dest, const format[], {Float,_}:...);
-	#define strformat(%0,%1,%2,%3) format(%0,%1,%3)
-#endif
+native strformat__(dest[], size=sizeof dest, const format[], {Float,_}:...) = format;
+/*
+native strformat(dest[], size=sizeof dest, bool:pack, const format[], {Float,_}:...);
+*/
+// This is a macro not a stock because forwarding all variable parameters is not easy.
+#define strformat(%0,%1,%2,%3) strformat__(%0,%1,%3)
 
 
 /// <summary>Decode an UU-encoded stream.</summary>
