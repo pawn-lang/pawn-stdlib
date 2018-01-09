@@ -228,10 +228,31 @@ native bool: ispacked(const string[]);
 
 native strformat__(dest[], size=sizeof dest, const format[], {Float,_}:...) = format;
 /*
-native strformat(dest[], size=sizeof dest, bool:pack, const format[], {Float,_}:...);
+native strformat(dest[], size=sizeof dest, bool:pack=true, const format[], {Fixed,Float,_}:...);
 */
-// This is a macro not a stock because forwarding all variable parameters is not easy.
 #define strformat(%0,%1,%2,%3) strformat__(%0,%1,%3)
+// This is a macro not a stock because forwarding all variable parameters is not easy.  But would
+// look something like this, if there wasn't a bug with `SYSREQ.C` and otherwise unused natives:
+//stock strformat(dest[], size=sizeof dest, bool:pack=true, const format[], {Float,_}:...)
+//{
+//	static ret;
+//	#emit LOAD.S.pri       16
+//	#emit LOAD.S.pri       20
+//	#emit POP.alt
+//	#emit SCTRL 5
+//	#emit POP.pri
+//	#emit STOR.pri         ret
+//	#emit POP.pri
+//	#emit ADD.C            0xFFFFFFFC
+//	#emit POP.alt
+//	#emit SWAP.alt
+//	#emit PUSH.pri
+//	#emit SYSREQ.C         format
+//	#emit PUSH ret
+//	#emit LCTRL            5
+//	#emit PUSH.pri
+//	#emit RETN
+//}
 
 
 /// <summary>Decode an UU-encoded stream.</summary>
