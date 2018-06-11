@@ -144,7 +144,7 @@ native fexist(const pattern[]);
 
 /// <summary>Find a filename matching a pattern.</summary>
 /// <param name="name">The string to hold the result in, returned as a packed string</param>
-/// <param name="const pattern">The pattern that should be matched. May contain wildcards</param>
+/// <param name="pattern">The pattern that should be matched. May contain wildcards</param>
 /// <param name="index">The number of the file, in case there are multiple matches (optional=<b><c>0</c></b>)</param>
 /// <param name="size">The maximum size of parameter name (optional=<b><c>sizeof name</c></b>)</param>
 /// <remarks>This function does not work in the current SA:MP version!</remarks>
