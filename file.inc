@@ -128,7 +128,6 @@ native fblockread(File: handle, buffer[], size = sizeof buffer);
 ///     <li><b><c>seek_end</c></b> - set the file position relative to the end of the file (parameter position must be zero or negative).</li>
 ///   </ul>
 /// </remarks>
-/// <returns>The new position; relative to the start of the file.</returns>
 native fseek(File: handle, position = 0, seek_whence: whence = seek_start);
 
 /// <summary>Returns the length of a file.</summary>
