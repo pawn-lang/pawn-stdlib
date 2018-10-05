@@ -137,9 +137,9 @@ native fseek(File: handle, position = 0, seek_whence: whence = seek_start);
 native flength(File: handle);
 
 /// <summary>Checks if a specific file exists in the <b><c>/scriptfiles</c></b> directory.</summary>
-/// <param name="pattern">The name of the file, optionally containing wild-cards characters</param>
-/// <returns>The number of files that match the pattern.</returns>
-native fexist(const pattern[]);
+/// <param name="name">The name of the file</param>
+/// <returns>1 if the file exists, 0 otherwise.</returns>
+native fexist(const name[]);
 
 /// <summary>Find a filename matching a pattern.</summary>
 /// <param name="name">The string to hold the result in, returned as a packed string</param>
