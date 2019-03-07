@@ -284,8 +284,7 @@ native memcpy(dest[], const source[], index=0, numbytes, maxlength=sizeof dest);
 /// <param name="ignorecase">When set to true, the case doesn't matter - HeLLo is the same as Hello. When false, they're not the same (optional=<b><c>0</c></b>)</param>
 /// <param name="length">When this length is set, the first x chars will be compared - doing "Hello" and "Hell No" with a length of 4 will say it's the same string (optional=<b><c>cellmax</c></b>)</param>
 /// <seealso name="strcmp"/>
-/// <remarks>This is a conveniece function that depends on <a href=#strcmp>strcmp</a>.</remarks>
+/// <remarks>This is a conveniece function that depends on <a href="#strcmp">strcmp</a>.</remarks>
 /// <returns><b><c>true</c></b> if the strings match each other on given length, <b><c>false</c></b> otherwise.</returns>
-/// </returns>
 stock bool: strequal(const string1[], const string2[], bool:ignorecase=false, length=cellmax)
 	return strcmp(string1, string2, ignorecase, length) == 0;
