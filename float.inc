@@ -44,9 +44,9 @@ native Float:floatstr(const string[]);
 /// <summary>Multiplies two floats with each other.</summary>
 /// <param name="oper1">First Float</param>
 /// <param name="oper2">Second Float, the first one gets multiplied with</param>
-/// <seealso name="Floatadd"/>
-/// <seealso name="Floatsub"/>
-/// <seealso name="Floatdiv"/>
+/// <seealso name="floatadd"/>
+/// <seealso name="floatsub"/>
+/// <seealso name="floatdiv"/>
 /// <returns>The product of the two given floats.</returns>
 native Float:floatmul(Float:oper1, Float:oper2);
 
@@ -62,18 +62,18 @@ native Float:floatdiv(Float:dividend, Float:divisor);
 /// <summary>Adds two floats together. This function is redundant as the standard operator (+) does the same thing.</summary>
 /// <param name="oper1">First float</param>
 /// <param name="oper2">Second float</param>
-/// <seealso name="Floatsub"/>
-/// <seealso name="Floatmul"/>
-/// <seealso name="Floatdiv"/>
+/// <seealso name="floatsub"/>
+/// <seealso name="floatmul"/>
+/// <seealso name="floatdiv"/>
 /// <returns>The sum of the two given floats.</returns>
 native Float:floatadd(Float:oper1, Float:oper2);
 
 /// <summary>Subtracts one float from another one. Note that this function has no real use, as one can simply use the standard operator (-) instead.</summary>
 /// <param name="oper1">First Float</param>
 /// <param name="oper2">Second Float (gets subtracted from the first float.)</param>
-/// <seealso name="Floatadd"/>
-/// <seealso name="Floatmul"/>
-/// <seealso name="Floatdiv"/>
+/// <seealso name="floatadd"/>
+/// <seealso name="floatmul"/>
+/// <seealso name="floatdiv"/>
 /// <returns>The difference of the two given floats.</returns>
 native Float:floatsub(Float:oper1, Float:oper2);
 
@@ -136,7 +136,7 @@ native Float:floatlog(Float:value, Float:base=10.0);
 /// <seealso name="floattan"/>
 /// <seealso name="floatcos"/>
 /// <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
-/// <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West. South is still 180° and North still 0°/360°. </remarks>
+/// <remarks>Also note that angles in GTA are counterclockwise; 270Â° is East and 90Â° is West. South is still 180Â° and North still 0Â°/360Â°. </remarks>
 /// <remarks>
 ///   <b>Angle modes:</b><p/>
 ///   <ul>
@@ -154,7 +154,7 @@ native Float:floatsin(Float:value, anglemode:mode=radian);
 /// <seealso name="floatsin"/>
 /// <seealso name="floattan"/>
 /// <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
-/// <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West. South is still 180° and North still 0°/360°. </remarks>
+/// <remarks>Also note that angles in GTA are counterclockwise; 270Â° is East and 90Â° is West. South is still 180Â° and North still 0Â°/360Â°. </remarks>
 /// <remarks>
 ///   <b>Angle modes:</b><p/>
 ///   <ul>
@@ -172,7 +172,7 @@ native Float:floatcos(Float:value, anglemode:mode=radian);
 /// <seealso name="floatsin"/>
 /// <seealso name="floatcos"/>
 /// <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>. Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
-/// <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West. South is still 180° and North still 0°/360°. </remarks>
+/// <remarks>Also note that angles in GTA are counterclockwise; 270Â° is East and 90Â° is West. South is still 180Â° and North still 0Â°/360Â°. </remarks>
 /// <remarks>
 ///   <b>Angle modes:</b><p/>
 ///   <ul>
