@@ -8,23 +8,26 @@
  * This file is provided as is (no warranties).
  */
 #if defined _Float_included
-  #endinput
+	#endinput
 #endif
 #define _Float_included
 #pragma library Float
 
 /* Different methods of rounding */
-enum floatround_method {
-  floatround_round,
-  floatround_floor,
-  floatround_ceil,
-  floatround_tozero,
-  floatround_unbiased
+enum floatround_method
+{
+	floatround_round,
+	floatround_floor,
+	floatround_ceil,
+	floatround_tozero,
+	floatround_unbiased
 }
-enum anglemode {
-  radian,
-  degrees,
-  grades
+
+enum anglemode
+{
+	radian,
+	degrees,
+	grades
 }
 
 /// <summary>Converts an integer into a float.</summary>
@@ -201,82 +204,82 @@ native Float:operator-(Float:oper1, Float:oper2) = floatsub;
 native Float:operator=(oper) = float;
 
 stock Float:operator++(Float:oper)
-    return oper+1.0;
+	return oper+1.0;
 
 stock Float:operator--(Float:oper)
-    return oper-1.0;
+	return oper-1.0;
 
 stock Float:operator-(Float:oper)
-    return oper^Float:cellmin;                  /* IEEE values are sign/magnitude */
+	return oper^Float:cellmin;                  /* IEEE values are sign/magnitude */
 
 stock Float:operator*(Float:oper1, oper2)
-    return floatmul(oper1, float(oper2));       /* "*" is commutative */
+	return floatmul(oper1, float(oper2));       /* "*" is commutative */
 
 stock Float:operator/(Float:oper1, oper2)
-    return floatdiv(oper1, float(oper2));
+	return floatdiv(oper1, float(oper2));
 
 stock Float:operator/(oper1, Float:oper2)
-    return floatdiv(float(oper1), oper2);
+	return floatdiv(float(oper1), oper2);
 
 stock Float:operator+(Float:oper1, oper2)
-    return floatadd(oper1, float(oper2));       /* "+" is commutative */
+	return floatadd(oper1, float(oper2));       /* "+" is commutative */
 
 stock Float:operator-(Float:oper1, oper2)
-    return floatsub(oper1, float(oper2));
+	return floatsub(oper1, float(oper2));
 
 stock Float:operator-(oper1, Float:oper2)
-    return floatsub(float(oper1), oper2);
+	return floatsub(float(oper1), oper2);
 
 stock bool:operator==(Float:oper1, Float:oper2)
-    return floatcmp(oper1, oper2) == 0;
+	return floatcmp(oper1, oper2) == 0;
 
 stock bool:operator==(Float:oper1, oper2)
-    return floatcmp(oper1, float(oper2)) == 0;  /* "==" is commutative */
+	return floatcmp(oper1, float(oper2)) == 0;  /* "==" is commutative */
 
 stock bool:operator!=(Float:oper1, Float:oper2)
-    return floatcmp(oper1, oper2) != 0;
+	return floatcmp(oper1, oper2) != 0;
 
 stock bool:operator!=(Float:oper1, oper2)
-    return floatcmp(oper1, float(oper2)) != 0;  /* "!=" is commutative */
+	return floatcmp(oper1, float(oper2)) != 0;  /* "!=" is commutative */
 
 stock bool:operator>(Float:oper1, Float:oper2)
-    return floatcmp(oper1, oper2) > 0;
+	return floatcmp(oper1, oper2) > 0;
 
 stock bool:operator>(Float:oper1, oper2)
-    return floatcmp(oper1, float(oper2)) > 0;
+	return floatcmp(oper1, float(oper2)) > 0;
 
 stock bool:operator>(oper1, Float:oper2)
-    return floatcmp(float(oper1), oper2) > 0;
+	return floatcmp(float(oper1), oper2) > 0;
 
 stock bool:operator>=(Float:oper1, Float:oper2)
-    return floatcmp(oper1, oper2) >= 0;
+	return floatcmp(oper1, oper2) >= 0;
 
 stock bool:operator>=(Float:oper1, oper2)
-    return floatcmp(oper1, float(oper2)) >= 0;
+	return floatcmp(oper1, float(oper2)) >= 0;
 
 stock bool:operator>=(oper1, Float:oper2)
-    return floatcmp(float(oper1), oper2) >= 0;
+	return floatcmp(float(oper1), oper2) >= 0;
 
 stock bool:operator<(Float:oper1, Float:oper2)
-    return floatcmp(oper1, oper2) < 0;
+	return floatcmp(oper1, oper2) < 0;
 
 stock bool:operator<(Float:oper1, oper2)
-    return floatcmp(oper1, float(oper2)) < 0;
+	return floatcmp(oper1, float(oper2)) < 0;
 
 stock bool:operator<(oper1, Float:oper2)
-    return floatcmp(float(oper1), oper2) < 0;
+	return floatcmp(float(oper1), oper2) < 0;
 
 stock bool:operator<=(Float:oper1, Float:oper2)
-    return floatcmp(oper1, oper2) <= 0;
+	return floatcmp(oper1, oper2) <= 0;
 
 stock bool:operator<=(Float:oper1, oper2)
-    return floatcmp(oper1, float(oper2)) <= 0;
+	return floatcmp(oper1, float(oper2)) <= 0;
 
 stock bool:operator<=(oper1, Float:oper2)
-    return floatcmp(float(oper1), oper2) <= 0;
+	return floatcmp(float(oper1), oper2) <= 0;
 
 stock bool:operator!(Float:oper)
-    return (_:oper & cellmax) == 0;
+	return (_:oper & cellmax) == 0;
 
 /* forbidden operations */
 forward operator%(Float:oper1, Float:oper2);

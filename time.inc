@@ -4,7 +4,7 @@
  * This file is provided as is (no warranties).
  */
 #if defined _time_included
-  #endinput
+	#endinput
 #endif
 #define _time_included
 #pragma library Time

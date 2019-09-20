@@ -4,7 +4,7 @@
  * This file is provided as is (no warranties).
  */
 #if defined _string_included
-  #endinput
+	#endinput
 #endif
 #define _string_included
 #pragma library String

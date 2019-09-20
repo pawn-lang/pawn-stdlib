@@ -4,7 +4,7 @@
  * This file is provided as is (no warranties).
  */
 #if defined _datagram_included
-  #endinput
+	#endinput
 #endif
 #define _datagram_included
 #pragma library DGram
