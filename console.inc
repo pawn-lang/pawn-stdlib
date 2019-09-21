@@ -9,12 +9,6 @@
 #define _console_included
 #pragma library Console
 
-// Don't define "printf" twice.
-#tryinclude <a_samp>
-#if defined _samp_included
-	#endinput
-#endif
-
 /// <summary>Prints a string to the server console (not in-game chat) and logs (server_log.txt).</summary>
 /// <param name="string">The string to print</param>
 /// <seealso name="printf"/>
