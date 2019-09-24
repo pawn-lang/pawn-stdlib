@@ -4,25 +4,25 @@
  * This file is provided as is (no warranties).
  */
 #if defined _file_included
-  #endinput
+	#endinput
 #endif
 #define _file_included
 #pragma library File
 
 enum filemode
-    {
-    io_read,            /* file must exist */
-    io_write,           /* creates a new file */
-    io_readwrite,       /* opens an existing file, or creates a new file */
-    io_append,          /* appends to file (write-only) */
-    }
+{
+	io_read,            /* file must exist */
+	io_write,           /* creates a new file */
+	io_readwrite,       /* opens an existing file, or creates a new file */
+	io_append,          /* appends to file (write-only) */
+}
 
 enum seek_whence
-    {
-    seek_start,
-    seek_current,
-    seek_end,
-    }
+{
+	seek_start,
+	seek_current,
+	seek_end,
+}
 
 const EOF = -1;
 

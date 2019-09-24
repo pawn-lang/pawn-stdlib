@@ -4,7 +4,7 @@
  * This file is provided as is (no warranties).
  */
 #if defined _string_included
-  #endinput
+	#endinput
 #endif
 #define _string_included
 #pragma library String
@@ -226,12 +226,33 @@ native valstr(dest[], value, bool:pack=false);
 /// <returns><b><c>true</c></b> if the string is packed, <b><c>false</c></b> if it's unpacked.</returns>
 native bool: ispacked(const string[]);
 
-// Don't define "format" twice.
-#tryinclude <a_samp>
-#if !defined _samp_included
-	native format(dest[], size=sizeof dest, const format[], {Float,_}:...);
-	#define strformat(%0,%1,%2,%3) format(%0,%1,%3)
-#endif
+native strformat__(dest[], size=sizeof dest, const format[], {Float,_}:...) = format;
+/*
+native strformat(dest[], size=sizeof dest, bool:pack=true, const format[], {Fixed,Float,_}:...);
+*/
+#define strformat(%0,%1,%2,%3) strformat__(%0,%1,%3)
+// This is a macro not a stock because forwarding all variable parameters is not easy.  But would
+// look something like this, if there wasn't a bug with `SYSREQ.C` and otherwise unused natives:
+//stock strformat(dest[], size=sizeof dest, bool:pack=true, const format[], {Float,_}:...)
+//{
+//	static ret;
+//	#emit LOAD.S.pri       16
+//	#emit LOAD.S.pri       20
+//	#emit POP.alt
+//	#emit SCTRL 5
+//	#emit POP.pri
+//	#emit STOR.pri         ret
+//	#emit POP.pri
+//	#emit ADD.C            0xFFFFFFFC
+//	#emit POP.alt
+//	#emit SWAP.alt
+//	#emit PUSH.pri
+//	#emit SYSREQ.C         format
+//	#emit PUSH ret
+//	#emit LCTRL            5
+//	#emit PUSH.pri
+//	#emit RETN
+//}
 
 
 /// <summary>Decode an UU-encoded stream.</summary>
