@@ -94,11 +94,10 @@ native bool:fputchar(File: handle, value, bool: utf8 = true);
 
 /// <summary>Reads a single character from a file.</summary>
 /// <param name="handle">The file handle to use; returned by <a href="#fopen">fopen</a></param>
-/// <param name="value">This parameter has no use, just keep it "0"</param>
 /// <param name="utf8">If true, read a character as UTF-8, otherwise as extended ASCII (optional=<b><c>true</c></b>)</param>
 /// <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
 /// <returns>If succeed, it returns the extended ASCII or UTF-8 value of the character at the current position in the file, otherwise EOF (end of file).</returns>
-native fgetchar(File: handle, value, bool: utf8 = true);
+native fgetchar(File: handle, bool: utf8 = true);
 
 /// <summary>Write data to a file in binary format, while ignoring line brakes and encoding.</summary>
 /// <param name="handle">The File handle to use, opened by fopen()</param>
