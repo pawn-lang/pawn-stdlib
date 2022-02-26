@@ -28,6 +28,9 @@ enum seek_whence
 	seek_end,
 }
 
+/**
+ * <library>file</library>
+ */
 const EOF = -1;
 
 /**

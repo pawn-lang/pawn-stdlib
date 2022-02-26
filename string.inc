@@ -99,7 +99,9 @@ native strcat(dest[], const source[], maxlength = sizeof (dest));
  * <returns>The length of the new destination string.</returns>
  */
 stock strcopy(dest[], const source[], maxlength = sizeof (dest))
+{
 	return strcat((dest[0] = EOS, dest), source, maxlength);
+}
 
 /**
  * <library>string</library>
@@ -266,11 +268,14 @@ native valstr(dest[], value, bool:pack = false);
  */
 native bool: ispacked(const string[]);
 
-native strformat__(dest[], size = sizeof (dest), const format[], {Float,_}:...) = format;
+/**
+ * <library>string</library>
+ */
+native __strformat(dest[], size = sizeof (dest), const format[], {Float,_}:...) = format;
 /*
 native strformat(dest[], size = sizeof (dest), bool:pack = true, const format[], {Fixed,Float,_}:...);
 */
-#define strformat(%0,%1,%2,%3) strformat__(%0,%1,%3)
+#define strformat(%0,%1,%2,%3) __strformat(%0,%1,%3)
 // This is a macro not a stock because forwarding all variable parameters is not easy.  But would
 // look something like this, if there wasn't a bug with `SYSREQ.C` and otherwise unused natives:
 //stock strformat(dest[], size = sizeof (dest), bool:pack = true, const format[], {Float,_}:...)
@@ -359,5 +364,7 @@ native memcpy(dest[], const source[], index = 0, numbytes, maxlength = sizeof (d
  * <returns><b><c>true</c></b> if the strings match each other on given length, <b><c>false</c></b> otherwise.</returns>
  */
 stock bool: strequal(const string1[], const string2[], bool:ignorecase = false, length = cellmax)
+{
 	return strcmp(string1, string2, ignorecase, length) == 0;
+}
 
