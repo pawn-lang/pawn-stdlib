@@ -1,5 +1,5 @@
 /**
- * <library name="console.inc" description="Console output.">
+ * <library name="console" description="Console output.">
  * <license>
  *   (c) Copyright 1998-2011, ITB CompuPhase
  *   This file is provided as is (no warranties).
