@@ -126,7 +126,7 @@ native clamp(value, min = cellmin, max = cellmax);
  * <seealso name="Existproperty"/>
  * <returns>The value of a property when the name is passed in; fills in the string argument when the value is passed in. If the property does not exist, this function returns zero.</returns>
  */
-native getproperty(id = 0, const name[]="", value = cellmin, string[]="");
+native getproperty(id = 0, const name[] = "", value = cellmin, string[] = "");
 
 /**
  * <summary>Add a new property or change an existing property.</summary>
@@ -138,7 +138,7 @@ native getproperty(id = 0, const name[]="", value = cellmin, string[]="");
  * <seealso name="Deleteproperty"/>
  * <seealso name="Existproperty"/>
  */
-native setproperty(id = 0, const name[]="", value = cellmin, const string[]="");
+native setproperty(id = 0, const name[] = "", value = cellmin, const string[] = "");
 
 /**
  * <summary>Delete an earlier set property (<a href="#setproperty">setproperty</a>).</summary>
@@ -150,7 +150,7 @@ native setproperty(id = 0, const name[]="", value = cellmin, const string[]="");
  * <seealso name="Existproperty"/>
  * <returns>The value of the property. If the property does not exist, the function returns <b><c>0</c></b>.</returns>
  */
-native deleteproperty(id = 0, const name[]="", value = cellmin);
+native deleteproperty(id = 0, const name[] = "", value = cellmin);
 
 /**
  * <summary>Check if a property exist.</summary>
@@ -162,5 +162,5 @@ native deleteproperty(id = 0, const name[]="", value = cellmin);
  * <seealso name="Deleteproperty"/>
  * <returns><b><c>1</c></b> if the property exists and <b><c>0</c></b> otherwise.</returns>
  */
-native existproperty(id = 0, const name[]="", value = cellmin);
+native existproperty(id = 0, const name[] = "", value = cellmin);
 

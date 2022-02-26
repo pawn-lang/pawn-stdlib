@@ -18,7 +18,8 @@
  * <remarks>This function does not work in the current SA:MP version!</remarks>
  * <returns><b><c>1</c></b> on success, <b><c>0</c></b> on failure.</returns>
  */
-native sendstring(const message[], const destination[]="");
+#pragma deprecated Just doesn't work.  Use `HTTP` or the "Requests" plugin.
+native sendstring(const message[], const destination[] = "");
 
 /**
  * <summary>Sends a packet.</summary>
@@ -29,7 +30,8 @@ native sendstring(const message[], const destination[]="");
  * <remarks>This function does not work in the current SA:MP version!</remarks>
  * <returns><b><c>1</c></b> on success, <b><c>0</c></b> on failure.</returns>
  */
-native sendpacket(const packet[], size, const destination[]="");
+#pragma deprecated Just doesn't work.  Use `HTTP` or the "Requests" plugin.
+native sendpacket(const packet[], size, const destination[] = "");
 
 /**
  * <summary>Sets up the port number to listen at.</summary>
@@ -41,6 +43,7 @@ native sendpacket(const packet[], size, const destination[]="");
  * <remarks>This function does not work in the current SA:MP version!</remarks>
  * <returns>This function always returns <b><c>0</c></b>.</returns>
  */
+#pragma deprecated Just doesn't work.  Use the "Requests" plugin.
 native listenport(port);
 
 /**
@@ -53,6 +56,7 @@ native listenport(port);
  * <remarks>This function does not work in the current SA:MP version!</remarks>
  * <returns>The return value of this function is currently ignored.</returns>
  */
+#pragma deprecated Just doesn't work.  Use the "Requests" plugin.
 forward @receivestring(const message[], const source[]);
 
 /**
@@ -67,5 +71,6 @@ forward @receivestring(const message[], const source[]);
  * <remarks>This function does not work in the current SA:MP version!</remarks>
  * <returns>The return value of this function is currently ignored.</returns>
  */
+#pragma deprecated Just doesn't work.  Use the "Requests" plugin.
 forward @receivepacket(const packet[], size, const source[]);
 
