@@ -38,8 +38,8 @@ native getdate(&year = 0, &month = 0, &day = 0);
 /**
  * <library>time</library>
  * <summary>This function can be used as a replacement for <a href="#GetTickCount">GetTickCount</a>, as it returns the number of milliseconds since the start-up of the server.</summary>
- * <param name="granularity">Upon return, this value contains the number of ticks that the internal system time will tick per second. This value therefore indicates the accuracy of the return value of this function (optional=<b><c>0</c></b>)</param>
- * <returns>The number of milliseconds since start-up of the system. For a 32-bit cell, this count overflows after approximately 24 days of continuous operation.</returns>
+ * <param name="granularity">Upon return, this value contains the number of ticks that the internal system time will tick per second.  This value therefore indicates the accuracy of the return value of this function (optional=<b><c>0</c></b>)</param>
+ * <returns>The number of milliseconds since start-up of the system.  For a 32-bit cell, this count overflows after approximately 24 days of continuous operation.</returns>
  */
 native tickcount(&granularity = 0);
 

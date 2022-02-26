@@ -39,35 +39,35 @@ const EOF = -1;
  * <param name="name">The path to the file to open (if just a filename is specified, it will open the file with the name specified in the 'scriptfiles' folder)</param>
  * <param name="mode">The mode to open the file with, see below (optional=<b><c>io_readwrite</c></b>)</param>
  * <remarks>This function can't access files outside the 'scriptfiles' folder!</remarks>
- * <remarks>If you use <a href="#io_read">io_read</a> and the file doesn't exist, it will return a <b><c>NULL</c></b> reference. Using <b>invalid references</b> on file functions will <b>crash</b> your server!</remarks>
+ * <remarks>If you use <a href="#io_read">io_read</a> and the file doesn't exist, it will return a <b><c>NULL</c></b> reference.  Using <b>invalid references</b> on file functions will <b>crash</b> your server!</remarks>
  * <remarks>
  *   <b>Modes:</b><p/>
  *   <ul>
  *     <li><b><c>io_read</c></b> - reads from the file.</li>
- *     <li><b><c>io_write</c></b> - write in the file, or create the file if it does not exist. Erases all existing contents.</li>
+ *     <li><b><c>io_write</c></b> - write in the file, or create the file if it does not exist.  Erases all existing contents.</li>
  *     <li><b><c>io_readwrite</c></b> - reads the file or creates it if it doesn't already exist.</li>
- *     <li><b><c>io_append</c></b> - appends (adds) to file, write-only. If the file does not exist, it is created.</li>
+ *     <li><b><c>io_append</c></b> - appends (adds) to file, write-only.  If the file does not exist, it is created.</li>
  *   </ul>
  * </remarks>
- * <returns>Returns the file handle. This handle is used for reading and writing. <b><c>0</c></b> if failed to open file.</returns>
+ * <returns>Returns the file handle.  This handle is used for reading and writing. <b><c>0</c></b> if failed to open file.</returns>
  */
 native File:fopen(const name[], filemode: mode = io_readwrite);
 
 /**
  * <library>file</library>
- * <summary>Closes a file. Files should always be closed when the script no longer needs them (after reading/writing).</summary>
- * <param name="handle">The file handle to close. Returned by <a href="#fopen">fopen</a></param>
+ * <summary>Closes a file.  Files should always be closed when the script no longer needs them (after reading/writing).</summary>
+ * <param name="handle">The file handle to close.  Returned by <a href="#fopen">fopen</a></param>
  * <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
  * <returns>
  *   <b><c>true</c></b>: The function executed successfully.<p/>
- *   <b><c>false</c></b>: The function failed to execute. The file could not be closed. It may already be closed.
+ *   <b><c>false</c></b>: The function failed to execute.  The file could not be closed.  It may already be closed.
  * </returns>
  */
 native bool:fclose(File: handle);
 
 /**
  * <library>file</library>
- * <summary>Creates a file in the "tmp", "temp" or root directory with random name for reading and writing. The file is deleted after <a href="#fclose">fclose</a> is used on the file.</summary>
+ * <summary>Creates a file in the "tmp", "temp" or root directory with random name for reading and writing.  The file is deleted after <a href="#fclose">fclose</a> is used on the file.</summary>
  * <remarks>This function can crash the server when the right directory isn't created.</remarks>
  * <returns>The temporary file handle. <b><c>0</c></b> if failed.</returns>
  */
@@ -81,7 +81,7 @@ native File:ftemp();
  * <remarks>Files that are currently open (<a href="#fopen">fopen</a>) must be closed first (<a href="#fclose">fclose</a>) to be deleted.</remarks>
  * <returns>
  *   <b><c>true</c></b>: The function executed successfully.<p/>
- *   <b><c>false</c></b>: The function failed to execute. The file doesn't exist, or you don't have permission to delete it.
+ *   <b><c>false</c></b>: The function failed to execute.  The file doesn't exist, or you don't have permission to delete it.
  * </returns>
  */
 native bool:fremove(const name[]);
@@ -154,8 +154,8 @@ native fblockread(File: handle, buffer[], size = sizeof (buffer));
 
 /**
  * <library>file</library>
- * <summary>Change the current position in the file. You can either seek forward or backward through the file.</summary>
- * <param name="handle">The file handle to use. Returned by <a href="#fopen">fopen</a></param>
+ * <summary>Change the current position in the file.  You can either seek forward or backward through the file.</summary>
+ * <param name="handle">The file handle to use.  Returned by <a href="#fopen">fopen</a></param>
  * <param name="position">The new position in the file, relative to the parameter whence (see below) (optional=<b><c>0</c></b>)</param>
  * <param name="whence">The starting position to which parameter position relates (optional=<b><c>seek_start</c></b>)</param>
  * <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
@@ -191,7 +191,7 @@ native fexist(const name[]);
  * <library>file</library>
  * <summary>Find a filename matching a pattern.</summary>
  * <param name="name">The string to hold the result in, returned as a packed string</param>
- * <param name="pattern">The pattern that should be matched. May contain wildcards</param>
+ * <param name="pattern">The pattern that should be matched.  May contain wildcards</param>
  * <param name="index">The number of the file, in case there are multiple matches (optional=<b><c>0</c></b>)</param>
  * <param name="size">The maximum size of parameter name (optional=<b><c>sizeof (name)</c></b>)</param>
  * <remarks>This function does not work in the current SA:MP version!</remarks>

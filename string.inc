@@ -32,7 +32,7 @@ native strlen(const string[]);
 
 /**
  * <library>string</library>
- * <summary>Pack a string. Packed strings use 75% less memory.</summary>
+ * <summary>Pack a string.  Packed strings use 75% less memory.</summary>
  * <param name="dest">The destination string to save the packed string in, passed by reference</param>
  * <param name="source">The source, original string</param>
  * <param name="maxlength">The maximum size to insert (optional=<b><c>sizeof (dest)</c></b>)</param>
@@ -166,7 +166,7 @@ native bool: strdel(string[], start, end);
  * <summary>Compares two strings to see if they are the same.</summary>
  * <param name="string1">The first string to compare</param>
  * <param name="string2">The second string to compare</param>
- * <param name="ignorecase">When set to true, the case doesn't matter - HeLLo is the same as Hello. When false, they're not the same (optional=<b><c>0</c></b>)</param>
+ * <param name="ignorecase">When set to true, the case doesn't matter - HeLLo is the same as Hello.  When false, they're not the same (optional=<b><c>0</c></b>)</param>
  * <param name="length">When this length is set, the first x chars will be compared - doing "Hello" and "Hell No" with a length of 4 will say it's the same string (optional=<b><c>cellmax</c></b>)</param>
  * <seealso name="strfind"/>
  * <seealso name="strtok"/>
@@ -178,7 +178,7 @@ native bool: strdel(string[], start, end);
  * <seealso name="strval"/>
  * <seealso name="strcat"/>
  * <seealso name="strequal"/>
- * <remarks>This function returns <b><c>0</c></b> if either string is empty. Check for null strings with <c>isnull()</c>. If you do not, for example, people can login to anyone's account by simply entering a blank password. </remarks>
+ * <remarks>This function returns <b><c>0</c></b> if either string is empty.  Check for null strings with <c>isnull()</c>.  If you do not, for example, people can login to anyone's account by simply entering a blank password. </remarks>
  * <remarks>
  *   <code>
  *   #if !defined isnull<p/>
@@ -200,7 +200,7 @@ native strcmp(const string1[], const string2[], bool:ignorecase = false, length 
  * <summary>Search for a sub string in a string.</summary>
  * <param name="string">The string you want to search in (haystack)</param>
  * <param name="sub">The string you want to search for (needle)</param>
- * <param name="ignorecase">When set to true, the case doesn't matter - HeLLo is the same as Hello. When false, they're not the same (optional=<b><c>0</c></b>)</param>
+ * <param name="ignorecase">When set to true, the case doesn't matter - HeLLo is the same as Hello.  When false, they're not the same (optional=<b><c>0</c></b>)</param>
  * <param name="pos">The offset to start searching from (optional=<b><c>0</c></b>)</param>
  * <seealso name="strcmp"/>
  * <seealso name="strtok"/>
@@ -240,7 +240,7 @@ native strval(const string[]);
  * <param name="pack">Whether to pack the destination (optional=<b><c>0</c></b>)</param>
  * <seealso name="strval"/>
  * <seealso name="strcmp"/>
- * <remarks>Passing a high value to this function can cause the server to freeze/crash. Fixes are available. Below is a fix that can be put straight in to your script.</remarks>
+ * <remarks>Passing a high value to this function can cause the server to freeze/crash.  Fixes are available.  Below is a fix that can be put straight in to your script.</remarks>
  * <remarks>
  *   <code>
  *     // valstr fix by Slice<p/>
@@ -304,10 +304,10 @@ native strformat(dest[], size = sizeof (dest), bool:pack = true, const format[],
  * <summary>Decode an UU-encoded stream.</summary>
  * <param name="dest">The array that will hold the decoded byte array.</param>
  * <param name="source">The UU-encoded source string</param>
- * <param name="maxlength">If the length of dest would exceed maxlength cells, the result is truncated to maxlength cells. Note that several bytes fit in each cell. (optional=<b><c>sizeof (dest)</c></b>)</param>
- * <remarks>Since the UU-encoding scheme is used for binary data, the decoded data is always "packed". The data is unlikely to be a string (the zero-terminator may not be present, or it may be in the middle of the data).</remarks>
- * <remarks>A buffer may be decoded "in-place"; the destination size is always smaller than the source size. Endian issues (for multi-byte values in the data stream) are not handled.</remarks>
- * <remarks>Binary data is encoded in chunks of <b><c>45</c></b> bytes. To assemble these chunks into a complete stream, function <a href="#memcpy">memcpy</a> allows you to concatenate buffers at byte-aligned boundaries.</remarks>
+ * <param name="maxlength">If the length of dest would exceed maxlength cells, the result is truncated to maxlength cells.  Note that several bytes fit in each cell. (optional=<b><c>sizeof (dest)</c></b>)</param>
+ * <remarks>Since the UU-encoding scheme is used for binary data, the decoded data is always "packed".  The data is unlikely to be a string (the zero-terminator may not be present, or it may be in the middle of the data).</remarks>
+ * <remarks>A buffer may be decoded "in-place"; the destination size is always smaller than the source size.  Endian issues (for multi-byte values in the data stream) are not handled.</remarks>
+ * <remarks>Binary data is encoded in chunks of <b><c>45</c></b> bytes.  To assemble these chunks into a complete stream, function <a href="#memcpy">memcpy</a> allows you to concatenate buffers at byte-aligned boundaries.</remarks>
  * <seealso name="memcpy"/>
  * <seealso name="uuencode"/>
  * <returns>The number of bytes decoded and stored in dest.</returns>
@@ -319,13 +319,13 @@ native uudecode(dest[], const source[], maxlength = sizeof (dest));
  * <summary>Encode an UU-encoded stream.</summary>
  * <param name="dest">The array that will hold the encoded string.</param>
  * <param name="source">The UU-encoded byte array.</param>
- * <param name="numbytes">The number of bytes (in the source array) to encode. This should not exceed <b><c>45</c></b>.</param>
- * <param name="maxlength">If the length of dest would exceed maxlength cells, the result is truncated to maxlength cells. Note that several bytes fit in each cell. (optional=<b><c>sizeof (dest)</c></b>)</param>
+ * <param name="numbytes">The number of bytes (in the source array) to encode.  This should not exceed <b><c>45</c></b>.</param>
+ * <param name="maxlength">If the length of dest would exceed maxlength cells, the result is truncated to maxlength cells.  Note that several bytes fit in each cell. (optional=<b><c>sizeof (dest)</c></b>)</param>
  * <seealso name="memcpy"/>
  * <seealso name="uudecode"/>
- * <remarks>This function always creates a packed string. The string has a newline character at the end.</remarks>
- * <remarks>Binary data is encoded in chunks of <b><c>45</c></b> bytes. To extract <b><c>45</c></b> bytes from an array with data, possibly from a byte-aligned address, you can use the function <a href="#memcpy">memcpy</a>.</remarks>
- * <remarks>A buffer may be encoded "in-place" if the destination buffer is large enough. Endian issues (for multi-byte values in the data stream) are not handled.</remarks>
+ * <remarks>This function always creates a packed string.  The string has a newline character at the end.</remarks>
+ * <remarks>Binary data is encoded in chunks of <b><c>45</c></b> bytes.  To extract <b><c>45</c></b> bytes from an array with data, possibly from a byte-aligned address, you can use the function <a href="#memcpy">memcpy</a>.</remarks>
+ * <remarks>A buffer may be encoded "in-place" if the destination buffer is large enough.  Endian issues (for multi-byte values in the data stream) are not handled.</remarks>
  * <returns>The number of characters encoded, excluding the zero string terminator; if the dest buffer is too small, not all bytes are stored.</returns>
  */
 native uuencode(dest[], const source[], numbytes, maxlength = sizeof (dest));
@@ -357,7 +357,7 @@ native memcpy(dest[], const source[], index = 0, numbytes, maxlength = sizeof (d
  * <summary>Compares two strings to see if they are the same.</summary>
  * <param name="string1">The first string to compare</param>
  * <param name="string2">The second string to compare</param>
- * <param name="ignorecase">When set to true, the case doesn't matter - HeLLo is the same as Hello. When false, they're not the same (optional=<b><c>0</c></b>)</param>
+ * <param name="ignorecase">When set to true, the case doesn't matter - HeLLo is the same as Hello.  When false, they're not the same (optional=<b><c>0</c></b>)</param>
  * <param name="length">When this length is set, the first x chars will be compared - doing "Hello" and "Hell No" with a length of 4 will say it's the same string (optional=<b><c>cellmax</c></b>)</param>
  * <seealso name="strcmp"/>
  * <remarks>This is a conveniece function that depends on <a href="#strcmp">strcmp</a>.</remarks>
