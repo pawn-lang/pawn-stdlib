@@ -1,8 +1,12 @@
-/* File input/output functions
- *
- * (c) Copyright 2004-2005, ITB CompuPhase
- * This file is provided as is (no warranties).
+/**
+ * <library name="file" description="File input/output functions.">
+ * <license>
+ *   (c) Copyright 2004-2005, ITB CompuPhase
+ *   This file is provided as is (no warranties).
+ * </license>
+ * </library>
  */
+
 #if defined _file_included
 	#endinput
 #endif

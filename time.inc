@@ -1,9 +1,13 @@
-/* Date/time functions
- *
- * (c) Copyright 2001-2005, ITB CompuPhase
- * This file is provided as is (no warranties).
+/**
+ * <library name="time" description="Date/time functions.">
+ * <license>
+ *   (c) Copyright 2001-2005, ITB CompuPhase
+ *   This file is provided as is (no warranties).
+ * </license>
+ * </library>
  */
-#if defined _time_included
+
+ #if defined _time_included
 	#endinput
 #endif
 #define _time_included

@@ -1,8 +1,12 @@
-/* Datagram sending/receiving
- *
- * (c) Copyright 2005, ITB CompuPhase
- * This file is provided as is (no warranties).
+/**
+ * <library name="datagram" description="Datagram sending/receiving.">
+ * <license>
+ *   (c) Copyright 2005, ITB CompuPhase
+ *   This file is provided as is (no warranties).
+ * </license>
+ * </library>
  */
+
 #if defined _datagram_included
 	#endinput
 #endif

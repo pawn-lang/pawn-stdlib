@@ -1,8 +1,12 @@
-/* Core functions
- *
- * (c) Copyright 1998-2005, ITB CompuPhase
- * This file is provided as is (no warranties).
+/**
+ * <library name="core" description="Core functions.">
+ * <license>
+ *   (c) Copyright 1998-2005, ITB CompuPhase
+ *   This file is provided as is (no warranties).
+ * </license>
+ * </library>
  */
+
 #if defined _core_included
 	#endinput
 #endif

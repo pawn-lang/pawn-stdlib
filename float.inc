@@ -1,12 +1,16 @@
-/* Float arithmetic
+/**
+ * <library name="time" description="Float arithmetic.">
+ * <license>
+ *   (c) Copyright 1999, Artran, Inc.
+ *   Written by Greg Garner (gmg@artran.com)
+ *   Modified in March 2001 to include user defined
+ *   operators for the floating point functions.
  *
- * (c) Copyright 1999, Artran, Inc.
- * Written by Greg Garner (gmg@artran.com)
- * Modified in March 2001 to include user defined
- * operators for the floating point functions.
- *
- * This file is provided as is (no warranties).
+ *   This file is provided as is (no warranties).
+ * </license>
+ * </library>
  */
+
 #if defined _Float_included
 	#endinput
 #endif

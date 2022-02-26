@@ -1,8 +1,12 @@
-/* String functions
- *
- * (c) Copyright 2005, ITB CompuPhase
- * This file is provided as is (no warranties).
+/**
+ * <library name="string" description="String functions.">
+ * <license>
+ *   (c) Copyright 2005, ITB CompuPhase
+ *   This file is provided as is (no warranties).
+ * </license>
+ * </library>
  */
+
 #if defined _string_included
 	#endinput
 #endif
