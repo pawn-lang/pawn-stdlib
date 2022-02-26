@@ -189,7 +189,8 @@ native Float:floatlog(Float:value, Float:base = 10.0);
  * <param name="mode">The angle mode (see below) to use, depending on the value entered (optional=<b><c>radian</c></b>)</param>
  * <seealso name="floattan"/>
  * <seealso name="floatcos"/>
- * <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>.
+ * <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example
+ * <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>.
  *  Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
  * <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West.  South
  * is still 180° and North still 0°/360°. </remarks>
@@ -212,7 +213,8 @@ native Float:floatsin(Float:value, anglemode:mode = radian);
  * <param name="mode">The angle mode (see below) to use, depending on the value entered (optional=<b><c>radian</c></b>)</param>
  * <seealso name="floatsin"/>
  * <seealso name="floattan"/>
- * <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>.
+ * <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example
+ * <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>.
  *  Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
  * <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West.  South
  * is still 180° and North still 0°/360°. </remarks>
@@ -235,7 +237,8 @@ native Float:floatcos(Float:value, anglemode:mode = radian);
  * <param name="mode">The angle mode to use, depending on the value entered</param>
  * <seealso name="floatsin"/>
  * <seealso name="floatcos"/>
- * <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>.
+ * <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example
+ * <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>.
  *  Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
  * <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West.  South
  * is still 180° and North still 0°/360°. </remarks>
