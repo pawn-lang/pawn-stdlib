@@ -271,14 +271,14 @@ native bool: ispacked(const string[]);
 /**
  * <library>string</library>
  */
-native __strformat(dest[], size = sizeof (dest), const format[], {Float,_}:...) = format;
+native __strformat(dest[], size = sizeof (dest), const format[], {Float, _}:...) = format;
 /*
-native strformat(dest[], size = sizeof (dest), bool:pack = true, const format[], {Fixed,Float,_}:...);
+native strformat(dest[], size = sizeof (dest), bool:pack = true, const format[], {Fixed, Float, _}:...);
 */
 #define strformat(%0,%1,%2,%3) __strformat(%0,%1,%3)
 // This is a macro not a stock because forwarding all variable parameters is not easy.  But would
 // look something like this, if there wasn't a bug with `SYSREQ.C` and otherwise unused natives:
-//stock strformat(dest[], size = sizeof (dest), bool:pack = true, const format[], {Float,_}:...)
+//stock strformat(dest[], size = sizeof (dest), bool:pack = true, const format[], {Float, _}:...)
 //{
 //	static ret;
 //	#emit LOAD.S.pri       16
