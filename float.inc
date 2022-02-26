@@ -82,7 +82,8 @@ native Float:floatdiv(Float:dividend, Float:divisor);
 
 /**
  * <library>float</library>
- * <summary>Adds two floats together.  This function is redundant as the standard operator (+) does the same thing.</summary>
+ * <summary>Adds two floats together.  This function is redundant as the standard operator (+) does
+ * the same thing.</summary>
  * <param name="oper1">First float</param>
  * <param name="oper2">Second float</param>
  * <seealso name="floatsub"/>
@@ -94,7 +95,8 @@ native Float:floatadd(Float:oper1, Float:oper2);
 
 /**
  * <library>float</library>
- * <summary>Subtracts one float from another one.  Note that this function has no real use, as one can simply use the standard operator (-) instead.</summary>
+ * <summary>Subtracts one float from another one.  Note that this function has no real use, as one can
+ * simply use the standard operator (-) instead.</summary>
  * <param name="oper1">First Float</param>
  * <param name="oper2">Second Float (gets subtracted from the first float.)</param>
  * <seealso name="floatadd"/>
@@ -106,7 +108,8 @@ native Float:floatsub(Float:oper1, Float:oper2);
 
 /**
  * <library>float</library>
- * <summary>Get the fractional part of a float.  This means the value of the numbers after the decimal point.</summary>
+ * <summary>Get the fractional part of a float.  This means the value of the numbers after the decimal
+ * point.</summary>
  * <param name="value">The float to get the fractional part of</param>
  * <seealso name="floatround"/>
  * <returns>The fractional part of the float, as a float value.</returns>
@@ -123,10 +126,12 @@ native Float:floatfract(Float:value);
  * <remarks>
  *   <b>Rounding methods:</b><p/>
  *   <ul>
- *     <li><b><c>floatround_round</c></b> - round to the nearest integer.  A fractional part of exactly 0.5 rounds upwards (this is the default).</li>
+ *     <li><b><c>floatround_round</c></b> - round to the nearest integer.  A fractional part of exactly
+ * 0.5 rounds upwards (this is the default).</li>
  *     <li><b><c>floatround_floor</c></b> - round downwards.</li>
  *     <li><b><c>floatround_ceil</c></b> - round upwards.</li>
- *     <li><b><c>floatround_tozero</c></b> - round downwards for positive values and upwards for negative values ("truncate").</li>
+ *     <li><b><c>floatround_tozero</c></b> - round downwards for positive values and upwards for negative
+ * values ("truncate").</li>
  *   </ul>
  * </remarks>
  * <returns>The rounded value as an integer.</returns>
@@ -138,7 +143,8 @@ native floatround(Float:value, floatround_method:method = floatround_round);
  * <summary>floatcmp can be used to compare float values to each other, to validate the comparison.</summary>
  * <param name="oper1">The first float value to compare</param>
  * <param name="oper2">The second float value to compare</param>
- * <returns><b><c>0</c></b> if value does match, <b><c>1</c></b> if the first value is bigger and <b><c>-1</c></b> if the 2nd value is bigger.</returns>
+ * <returns><b><c>0</c></b> if value does match, <b><c>1</c></b> if the first value is bigger and <b><c>-1</c></b>
+ * if the 2nd value is bigger.</returns>
  */
 native floatcmp(Float:oper1, Float:oper2);
 
@@ -148,7 +154,8 @@ native floatcmp(Float:oper1, Float:oper2);
  * <param name="value">The value to calculate the square root of</param>
  * <seealso name="floatpower"/>
  * <seealso name="floatlog"/>
- * <remarks>This function raises a "domain" error if the input value is negative.  You may use <a href="#floatabs">floatabs</a> to get the absolute (positive) value.</remarks>
+ * <remarks>This function raises a "domain" error if the input value is negative.  You may use <a href="#floatabs">floatabs</a>
+ * to get the absolute (positive) value.</remarks>
  * <returns>The square root of the input value, as a float.</returns>
  */
 native Float:floatsqroot(Float:value);
@@ -182,8 +189,10 @@ native Float:floatlog(Float:value, Float:base = 10.0);
  * <param name="mode">The angle mode (see below) to use, depending on the value entered (optional=<b><c>radian</c></b>)</param>
  * <seealso name="floattan"/>
  * <seealso name="floatcos"/>
- * <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>.  Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
- * <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West.  South is still 180° and North still 0°/360°. </remarks>
+ * <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>.
+ *  Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
+ * <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West.  South
+ * is still 180° and North still 0°/360°. </remarks>
  * <remarks>
  *   <b>Angle modes:</b><p/>
  *   <ul>
@@ -203,8 +212,10 @@ native Float:floatsin(Float:value, anglemode:mode = radian);
  * <param name="mode">The angle mode (see below) to use, depending on the value entered (optional=<b><c>radian</c></b>)</param>
  * <seealso name="floatsin"/>
  * <seealso name="floattan"/>
- * <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>.  Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
- * <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West.  South is still 180° and North still 0°/360°. </remarks>
+ * <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>.
+ *  Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
+ * <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West.  South
+ * is still 180° and North still 0°/360°. </remarks>
  * <remarks>
  *   <b>Angle modes:</b><p/>
  *   <ul>
@@ -224,8 +235,10 @@ native Float:floatcos(Float:value, anglemode:mode = radian);
  * <param name="mode">The angle mode to use, depending on the value entered</param>
  * <seealso name="floatsin"/>
  * <seealso name="floatcos"/>
- * <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>.  Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
- * <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West.  South is still 180° and North still 0°/360°. </remarks>
+ * <remarks>GTA/SA-MP use <b>degrees</b> for angles in most circumstances, for example <a href="#GetPlayerFacingAngle">GetPlayerFacingAngle</a>.
+ *  Therefore, it is most likely you'll want to use the <b>degrees</b> angle mode, not radians. </remarks>
+ * <remarks>Also note that angles in GTA are counterclockwise; 270° is East and 90° is West.  South
+ * is still 180° and North still 0°/360°. </remarks>
  * <remarks>
  *   <b>Angle modes:</b><p/>
  *   <ul>
