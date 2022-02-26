@@ -141,7 +141,7 @@ native strmid(dest[], const source[], start, end, maxlength = sizeof (dest));
  * <seealso name="strval"/>
  * <seealso name="strcat"/>
  */
-native bool: strins(string[], const substr[], pos, maxlength = sizeof (string));
+native bool:strins(string[], const substr[], pos, maxlength = sizeof (string));
 
 /**
  * <library>string</library>
@@ -159,7 +159,7 @@ native bool: strins(string[], const substr[], pos, maxlength = sizeof (string));
  * <seealso name="strval"/>
  * <seealso name="strcat"/>
  */
-native bool: strdel(string[], start, end);
+native bool:strdel(string[], start, end);
 
 /**
  * <library>string</library>
@@ -274,7 +274,7 @@ native valstr(dest[], value, bool:pack = false);
  * <param name="string">The string to check</param>
  * <returns><b><c>true</c></b> if the string is packed, <b><c>false</c></b> if it's unpacked.</returns>
  */
-native bool: ispacked(const string[]);
+native bool:ispacked(const string[]);
 
 /**
  * <library>string</library>
@@ -389,7 +389,7 @@ native memcpy(dest[], const source[], index = 0, numbytes, maxlength = sizeof (d
  * <returns><b><c>true</c></b> if the strings match each other on given length, <b><c>false</c></b>
  * otherwise.</returns>
  */
-stock bool: strequal(const string1[], const string2[], bool:ignorecase = false, length = cellmax)
+stock bool:strequal(const string1[], const string2[], bool:ignorecase = false, length = cellmax)
 {
 	return strcmp(string1, string2, ignorecase, length) == 0;
 }

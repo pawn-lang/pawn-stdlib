@@ -56,7 +56,7 @@ const EOF = -1;
  * <returns>Returns the file handle.  This handle is used for reading and writing. <b><c>0</c></b> if
  * failed to open file.</returns>
  */
-native File:fopen(const name[], filemode: mode = io_readwrite);
+native File:fopen(const name[], filemode:mode = io_readwrite);
 
 /**
  * <library>file</library>
@@ -71,7 +71,7 @@ native File:fopen(const name[], filemode: mode = io_readwrite);
  * be closed.
  * </returns>
  */
-native bool:fclose(File: handle);
+native bool:fclose(File:handle);
 
 /**
  * <library>file</library>
@@ -109,7 +109,7 @@ native bool:fremove(const name[]);
  * <remarks>This function doesn't support <a href="#strpack">packed strings</a>.</remarks>
  * <returns>The length of the written string as an integer.</returns>
  */
-native fwrite(File: handle, const string[]);
+native fwrite(File:handle, const string[]);
 
 /**
  * <library>file</library>
@@ -122,7 +122,7 @@ native fwrite(File: handle, const string[]);
  * <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
  * <returns>The length of <b>string</b> (the read text) as an integer.</returns>
  */
-native fread(File: handle, string[], size = sizeof (string), bool: pack = false);
+native fread(File:handle, string[], size = sizeof (string), bool:pack = false);
 
 /**
  * <library>file</library>
@@ -133,7 +133,7 @@ native fread(File: handle, string[], size = sizeof (string), bool: pack = false)
  * <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using
  * <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
  */
-native bool:fputchar(File: handle, value, bool: utf8 = true);
+native bool:fputchar(File:handle, value, bool:utf8 = true);
 
 /**
  * <library>file</library>
@@ -146,7 +146,7 @@ native bool:fputchar(File: handle, value, bool: utf8 = true);
  * <returns>If succeed, it returns the extended ASCII or UTF-8 value of the character at the current
  * position in the file, otherwise EOF (end of file).</returns>
  */
-native fgetchar(File: handle, value, bool: utf8 = true);
+native fgetchar(File:handle, value, bool:utf8 = true);
 
 /**
  * <library>file</library>
@@ -157,7 +157,7 @@ native fgetchar(File: handle, value, bool: utf8 = true);
  * <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using
  * <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
  */
-native fblockwrite(File: handle, const buffer[], size = sizeof (buffer));
+native fblockwrite(File:handle, const buffer[], size = sizeof (buffer));
 
 /**
  * <library>file</library>
@@ -169,7 +169,7 @@ native fblockwrite(File: handle, const buffer[], size = sizeof (buffer));
  * <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
  * <returns>The number of cells read. <b><c>0</c></b> if the file end has been reached.</returns>
  */
-native fblockread(File: handle, buffer[], size = sizeof (buffer));
+native fblockread(File:handle, buffer[], size = sizeof (buffer));
 
 /**
  * <library>file</library>
@@ -193,7 +193,7 @@ native fblockread(File: handle, buffer[], size = sizeof (buffer));
  *   </ul>
  * </remarks>
  */
-native fseek(File: handle, position = 0, seek_whence: whence = seek_start);
+native fseek(File:handle, position = 0, seek_whence:whence = seek_start);
 
 /**
  * <library>file</library>
@@ -203,7 +203,7 @@ native fseek(File: handle, position = 0, seek_whence: whence = seek_start);
  * <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
  * <returns>The length of a file, in bytes.</returns>
  */
-native flength(File: handle);
+native flength(File:handle);
 
 /**
  * <library>file</library>
