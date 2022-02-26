@@ -14,6 +14,7 @@
 #pragma library Core
 
 /**
+ * <library>core</library>
  * <summary>Returns the amount of memory available for the heap/stack in bytes.</summary>
  * <remarks>In absence of recursion, the pawn parser can also give an estimate of the required stack/heap space.</remarks>
  * <returns>The free space on the heap in bytes. The stack and the heap occupy a shared memory area, so this value indicates the number of bytes that is left for either the stack or the heap.</returns>
@@ -21,6 +22,7 @@
 native heapspace();
 
 /**
+ * <library>core</library>
  * <summary>This function returns the ID of a public function by its name.</summary>
  * <param name="name">The name of the public function to get the ID of</param>
  * <seealso name="CallLocalFunction"/>
@@ -30,6 +32,7 @@ native heapspace();
 native funcidx(const name[]);
 
 /**
+ * <library>core</library>
  * <summary>Get the number of arguments passed to a function.</summary>
  * <seealso name="getarg"/>
  * <seealso name="setarg"/>
@@ -38,6 +41,7 @@ native funcidx(const name[]);
 native numargs();
 
 /**
+ * <library>core</library>
  * <summary>Get an argument that was passed to a function.</summary>
  * <param name="arg">The argument sequence number. Use <b><c>0</c></b> for first argument</param>
  * <param name="index">The index (in case the argument is an array) (optional=<b><c>0</c></b>)</param>
@@ -48,6 +52,7 @@ native numargs();
 native getarg(arg, index = 0);
 
 /**
+ * <library>core</library>
  * <summary>Set an argument that was passed to a function.</summary>
  * <param name="arg">The argument sequence number. Use <b><c>0</c></b> for first argument</param>
  * <param name="index">The index (if the argument is an array) (optional=<b><c>0</c></b>)</param>
@@ -59,6 +64,7 @@ native getarg(arg, index = 0);
 native setarg(arg, index = 0, value);
 
 /**
+ * <library>core</library>
  * <summary>This function changes a single character to lowercase.</summary>
  * <param name="c">The character to change to lowercase</param>
  * <remarks>Support for accented characters is platform-dependent.</remarks>
@@ -67,6 +73,7 @@ native setarg(arg, index = 0, value);
 native tolower(c);
 
 /**
+ * <library>core</library>
  * <summary>This function changes a single character to uppercase.</summary>
  * <param name="c">The character to change to uppercase</param>
  * <remarks>Support for accented characters is platform-dependent.</remarks>
@@ -75,6 +82,7 @@ native tolower(c);
 native toupper(c);
 
 /**
+ * <library>core</library>
  * <summary>Swap bytes in a cell</summary>
  * <param name="c">The value for which to swap the bytes.</param>
  * <returns>A value where the bytes are swapped (the lowest byte becomes the highest byte)</returns>
@@ -82,6 +90,7 @@ native toupper(c);
 native swapchars(c);
 
 /**
+ * <library>core</library>
  * <summary>Get a pseudo-random number.</summary>
  * <param name="max">The range of values (from <b><c>0</c></b> to <b><c>max-1</c></b>) that can be returned</param>
  * <remarks>Using a value smaller than <b><c>1</c></b> gives weird values.</remarks>
@@ -91,6 +100,7 @@ native swapchars(c);
 native random(max);
 
 /**
+ * <library>core</library>
  * <summary>Return the lowest of two numbers</summary>
  * <param name="value1">The two values for which to find the lowest number</param>
  * <param name="value2">The two values for which to find the lowest number</param>
@@ -101,6 +111,7 @@ native random(max);
 native min(value1, value2);
 
 /**
+ * <library>core</library>
  * <summary>Return the highest of two numbers</summary>
  * <param name="value1">The two values for which to find the highest number</param>
  * <param name="value2">The two values for which to find the highest number</param>
@@ -111,6 +122,7 @@ native min(value1, value2);
 native max(value1, value2);
 
 /**
+ * <library>core</library>
  * <summary>Force a value to be inside a range.</summary>
  * <param name="value">The value to force in a range</param>
  * <param name="min">The low bound of the range (optional=<b><c>cellmin</c></b>)</param>
@@ -120,6 +132,7 @@ native max(value1, value2);
 native clamp(value, min = cellmin, max = cellmax);
 
 /**
+ * <library>core</library>
  * <summary>Get a specific property from the memory, the string is returned as a packed string!.</summary>
  * <param name="id">The <a href="http://en.wikipedia.org/wiki/Virtual_machine">virtual machine</a> to use, you should keep this zero (optional=<b><c>0</c></b>)</param>
  * <param name="name">The property's name, you should keep this "" (optional=<b><c>""</c></b>)</param>
@@ -133,6 +146,7 @@ native clamp(value, min = cellmin, max = cellmax);
 native getproperty(id = 0, const name[] = "", value = cellmin, string[] = "");
 
 /**
+ * <library>core</library>
  * <summary>Add a new property or change an existing property.</summary>
  * <param name="id">The virtual machine to use, you should keep this zero (optional=<b><c>0</c></b>)</param>
  * <param name="name">Used in combination with value when storing integers; don't use this if you want to store a string(optional=<b><c>""</c></b>)</param>
@@ -145,6 +159,7 @@ native getproperty(id = 0, const name[] = "", value = cellmin, string[] = "");
 native setproperty(id = 0, const name[] = "", value = cellmin, const string[] = "");
 
 /**
+ * <library>core</library>
  * <summary>Delete an earlier set property (<a href="#setproperty">setproperty</a>).</summary>
  * <param name="id">The <a href="http://en.wikipedia.org/wiki/Virtual_machine">virtual machine</a> to use. You should keep this as zero (optional=<b><c>0</c></b>)</param>
  * <param name="name">The property's name, you should keep this blank (optional=<b><c>""</c></b>)</param>
@@ -157,6 +172,7 @@ native setproperty(id = 0, const name[] = "", value = cellmin, const string[] = 
 native deleteproperty(id = 0, const name[] = "", value = cellmin);
 
 /**
+ * <library>core</library>
  * <summary>Check if a property exist.</summary>
  * <param name="id">The <a href="http://en.wikipedia.org/wiki/Virtual_machine">virtual machine</a> to use, you should keep this zero (optional=<b><c>0</c></b>)</param>
  * <param name="name">The property's name, you should keep this (optional=<b><c>""</c></b>)</param>

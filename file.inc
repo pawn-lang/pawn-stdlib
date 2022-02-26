@@ -31,6 +31,7 @@ enum seek_whence
 const EOF = -1;
 
 /**
+ * <library>file</library>
  * <summary>Open a file (to read from or write to).</summary>
  * <param name="name">The path to the file to open (if just a filename is specified, it will open the file with the name specified in the 'scriptfiles' folder)</param>
  * <param name="mode">The mode to open the file with, see below (optional=<b><c>io_readwrite</c></b>)</param>
@@ -50,6 +51,7 @@ const EOF = -1;
 native File:fopen(const name[], filemode: mode = io_readwrite);
 
 /**
+ * <library>file</library>
  * <summary>Closes a file. Files should always be closed when the script no longer needs them (after reading/writing).</summary>
  * <param name="handle">The file handle to close. Returned by <a href="#fopen">fopen</a></param>
  * <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
@@ -61,6 +63,7 @@ native File:fopen(const name[], filemode: mode = io_readwrite);
 native bool:fclose(File: handle);
 
 /**
+ * <library>file</library>
  * <summary>Creates a file in the "tmp", "temp" or root directory with random name for reading and writing. The file is deleted after <a href="#fclose">fclose</a> is used on the file.</summary>
  * <remarks>This function can crash the server when the right directory isn't created.</remarks>
  * <returns>The temporary file handle. <b><c>0</c></b> if failed.</returns>
@@ -68,6 +71,7 @@ native bool:fclose(File: handle);
 native File:ftemp();
 
 /**
+ * <library>file</library>
  * <summary>Delete a file.</summary>
  * <param name="name">The <b>path</b> of the file to delete. (NOTE: NOT a file handle)</param>
  * <remarks>The file path must be valid.</remarks>
@@ -80,6 +84,7 @@ native File:ftemp();
 native bool:fremove(const name[]);
 
 /**
+ * <library>file</library>
  * <summary>Write text into a file.</summary>
  * <param name="handle">The handle of the file to write to (returned by <a href="#fopen">fopen</a>)</param>
  * <param name="string">The string of text to write in to the file</param>
@@ -91,6 +96,7 @@ native bool:fremove(const name[]);
 native fwrite(File: handle, const string[]);
 
 /**
+ * <library>file</library>
  * <summary>Read a single line from a file.</summary>
  * <param name="handle">The handle of the file to read from (returned by <a href="#fopen">fopen</a>)</param>
  * <param name="string">A string array to store the read text in, passed by reference</param>
@@ -102,6 +108,7 @@ native fwrite(File: handle, const string[]);
 native fread(File: handle, string[], size = sizeof (string), bool: pack = false);
 
 /**
+ * <library>file</library>
  * <summary>Write one character to a file.</summary>
  * <param name="handle">The File handle to use, earlier opened by <a href="#fopen">fopen</a></param>
  * <param name="value">The character to write into the file</param>
@@ -111,6 +118,7 @@ native fread(File: handle, string[], size = sizeof (string), bool: pack = false)
 native bool:fputchar(File: handle, value, bool: utf8 = true);
 
 /**
+ * <library>file</library>
  * <summary>Reads a single character from a file.</summary>
  * <param name="handle">The file handle to use; returned by <a href="#fopen">fopen</a></param>
  * <param name="value">This parameter has no use, just keep it "0"</param>
@@ -121,6 +129,7 @@ native bool:fputchar(File: handle, value, bool: utf8 = true);
 native fgetchar(File: handle, value, bool: utf8 = true);
 
 /**
+ * <library>file</library>
  * <summary>Write data to a file in binary format, while ignoring line brakes and encoding.</summary>
  * <param name="handle">The File handle to use, opened by fopen()</param>
  * <param name="buffer">The data to write to the file</param>
@@ -130,6 +139,7 @@ native fgetchar(File: handle, value, bool: utf8 = true);
 native fblockwrite(File: handle, const buffer[], size = sizeof (buffer));
 
 /**
+ * <library>file</library>
  * <summary>This function allows you to read data from a file, without encoding and line terminators.</summary>
  * <param name="handle">File handle to use, opened by <a href="#fopen">fopen</a></param>
  * <param name="buffer">The buffer to save the read data in</param>
@@ -140,6 +150,7 @@ native fblockwrite(File: handle, const buffer[], size = sizeof (buffer));
 native fblockread(File: handle, buffer[], size = sizeof (buffer));
 
 /**
+ * <library>file</library>
  * <summary>Change the current position in the file. You can either seek forward or backward through the file.</summary>
  * <param name="handle">The file handle to use. Returned by <a href="#fopen">fopen</a></param>
  * <param name="position">The new position in the file, relative to the parameter whence (see below) (optional=<b><c>0</c></b>)</param>
@@ -157,6 +168,7 @@ native fblockread(File: handle, buffer[], size = sizeof (buffer));
 native fseek(File: handle, position = 0, seek_whence: whence = seek_start);
 
 /**
+ * <library>file</library>
  * <summary>Returns the length of a file.</summary>
  * <param name="handle">The file handle returned by <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a></param>
  * <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
@@ -165,6 +177,7 @@ native fseek(File: handle, position = 0, seek_whence: whence = seek_start);
 native flength(File: handle);
 
 /**
+ * <library>file</library>
  * <summary>Checks if a specific file exists in the <b><c>/scriptfiles</c></b> directory.</summary>
  * <param name="name">The name of the file</param>
  * <returns>1 if the file exists, 0 otherwise.</returns>
@@ -172,6 +185,7 @@ native flength(File: handle);
 native fexist(const name[]);
 
 /**
+ * <library>file</library>
  * <summary>Find a filename matching a pattern.</summary>
  * <param name="name">The string to hold the result in, returned as a packed string</param>
  * <param name="pattern">The pattern that should be matched. May contain wildcards</param>

@@ -14,6 +14,7 @@
 #pragma library Console
 
 /**
+ * <library>console</library>
  * <summary>Prints a string to the server console (not in-game chat) and logs (server_log.txt).</summary>
  * <param name="string">The string to print</param>
  * <seealso name="printf"/>
@@ -21,6 +22,7 @@
 native print(const string[]);
 
 /**
+ * <library>console</library>
  * <summary>Outputs a formatted string on the console (the server window, not the in-game chat).</summary>
  * <param name="format">The format string</param>
  * <param name="">Indefinite number of arguments of any tag</param>

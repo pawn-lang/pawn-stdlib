@@ -14,6 +14,7 @@
 #pragma library Time
 
 /**
+ * <library>time</library>
  * <summary>Get the current server time.</summary>
  * <param name="hour">The variable to store the hour in, passed by reference (optional=<b><c>0</c></b>)</param>
  * <param name="minute">The variable to store the minute in, passed by reference (optional=<b><c>0</c></b>)</param>
@@ -24,6 +25,7 @@
 native gettime(&hour = 0, &minute = 0, &second = 0);
 
 /**
+ * <library>time</library>
  * <summary>Get the current server date.</summary>
  * <param name="year">The variable to store the year in, passed by reference (optional=<b><c>0</c></b>)</param>
  * <param name="month">The variable to store the month in, passed by reference (optional=<b><c>0</c></b>)</param>
@@ -34,6 +36,7 @@ native gettime(&hour = 0, &minute = 0, &second = 0);
 native getdate(&year = 0, &month = 0, &day = 0);
 
 /**
+ * <library>time</library>
  * <summary>This function can be used as a replacement for <a href="#GetTickCount">GetTickCount</a>, as it returns the number of milliseconds since the start-up of the server.</summary>
  * <param name="granularity">Upon return, this value contains the number of ticks that the internal system time will tick per second. This value therefore indicates the accuracy of the return value of this function (optional=<b><c>0</c></b>)</param>
  * <returns>The number of milliseconds since start-up of the system. For a 32-bit cell, this count overflows after approximately 24 days of continuous operation.</returns>

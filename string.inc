@@ -14,6 +14,7 @@
 #pragma library String
 
 /**
+ * <library>string</library>
  * <summary>Get the length of a string.</summary>
  * <param name="string">The string to get the length of</param>
  * <seealso name="strcmp"/>
@@ -30,6 +31,7 @@
 native strlen(const string[]);
 
 /**
+ * <library>string</library>
  * <summary>Pack a string. Packed strings use 75% less memory.</summary>
  * <param name="dest">The destination string to save the packed string in, passed by reference</param>
  * <param name="source">The source, original string</param>
@@ -48,6 +50,7 @@ native strlen(const string[]);
 native strpack(dest[], const source[], maxlength = sizeof (dest));
 
 /**
+ * <library>string</library>
  * <summary>This function can be used to unpack a string.</summary>
  * <param name="dest">The destination string to save the unpacked string in, passed by reference</param>
  * <param name="source">The source, original packed string</param>
@@ -68,6 +71,7 @@ native strpack(dest[], const source[], maxlength = sizeof (dest));
 native strunpack(dest[], const source[], maxlength = sizeof (dest));
 
 /**
+ * <library>string</library>
  * <summary>This function concatenates (joins together) two strings into the destination string.</summary>
  * <param name="dest">The string to store the two concatenated strings in</param>
  * <param name="source">The source string</param>
@@ -86,6 +90,7 @@ native strunpack(dest[], const source[], maxlength = sizeof (dest));
 native strcat(dest[], const source[], maxlength = sizeof (dest));
 
 /**
+ * <library>string</library>
  * <summary>Copies a string into the destination string.</summary>
  * <param name="dest">The string to copy the source string into</param>
  * <param name="source">The source string</param>
@@ -97,6 +102,7 @@ stock strcopy(dest[], const source[], maxlength = sizeof (dest))
 	return strcat((dest[0] = EOS, dest), source, maxlength);
 
 /**
+ * <library>string</library>
  * <summary>Extract a range of characters from a string.</summary>
  * <param name="dest">The string to store the extracted characters in</param>
  * <param name="source">The string from which to extract characters</param>
@@ -117,6 +123,7 @@ stock strcopy(dest[], const source[], maxlength = sizeof (dest))
 native strmid(dest[], const source[], start, end, maxlength = sizeof (dest));
 
 /**
+ * <library>string</library>
  * <summary>Insert a string into another string.</summary>
  * <param name="string">The string you want to insert substr in</param>
  * <param name="substr">The string you want to insert into string</param>
@@ -135,6 +142,7 @@ native strmid(dest[], const source[], start, end, maxlength = sizeof (dest));
 native bool: strins(string[], const substr[], pos, maxlength = sizeof (string));
 
 /**
+ * <library>string</library>
  * <summary>Delete part of a string.</summary>
  * <param name="string">The string to delete part of</param>
  * <param name="start">The position of the first character to delete</param>
@@ -152,6 +160,7 @@ native bool: strins(string[], const substr[], pos, maxlength = sizeof (string));
 native bool: strdel(string[], start, end);
 
 /**
+ * <library>string</library>
  * <summary>Compares two strings to see if they are the same.</summary>
  * <param name="string1">The first string to compare</param>
  * <param name="string2">The second string to compare</param>
@@ -185,6 +194,7 @@ native bool: strdel(string[], start, end);
 native strcmp(const string1[], const string2[], bool:ignorecase = false, length = cellmax);
 
 /**
+ * <library>string</library>
  * <summary>Search for a sub string in a string.</summary>
  * <param name="string">The string you want to search in (haystack)</param>
  * <param name="sub">The string you want to search for (needle)</param>
@@ -204,6 +214,7 @@ native strcmp(const string1[], const string2[], bool:ignorecase = false, length 
 native strfind(const string[], const sub[], bool:ignorecase = false, pos = 0);
 
 /**
+ * <library>string</library>
  * <summary>Convert a string to an integer.</summary>
  * <param name="string">The string you want to convert to an integer</param>
  * <seealso name="strcmp"/>
@@ -220,6 +231,7 @@ native strfind(const string[], const sub[], bool:ignorecase = false, pos = 0);
 native strval(const string[]);
 
 /**
+ * <library>string</library>
  * <summary>Convert an integer into a string.</summary>
  * <param name="dest">The destination of the string</param>
  * <param name="value">The value to convert to a string</param>
@@ -247,6 +259,7 @@ native strval(const string[]);
 native valstr(dest[], value, bool:pack = false);
 
 /**
+ * <library>string</library>
  * <summary>Checks if the given string is packed.</summary>
  * <param name="string">The string to check</param>
  * <returns><b><c>true</c></b> if the string is packed, <b><c>false</c></b> if it's unpacked.</returns>
@@ -282,6 +295,7 @@ native strformat(dest[], size = sizeof (dest), bool:pack = true, const format[],
 //}
 
 /**
+ * <library>string</library>
  * <summary>Decode an UU-encoded stream.</summary>
  * <param name="dest">The array that will hold the decoded byte array.</param>
  * <param name="source">The UU-encoded source string</param>
@@ -296,6 +310,7 @@ native strformat(dest[], size = sizeof (dest), bool:pack = true, const format[],
 native uudecode(dest[], const source[], maxlength = sizeof (dest));
 
 /**
+ * <library>string</library>
  * <summary>Encode an UU-encoded stream.</summary>
  * <param name="dest">The array that will hold the encoded string.</param>
  * <param name="source">The UU-encoded byte array.</param>
@@ -311,6 +326,7 @@ native uudecode(dest[], const source[], maxlength = sizeof (dest));
 native uuencode(dest[], const source[], numbytes, maxlength = sizeof (dest));
 
 /**
+ * <library>string</library>
  * <summary>Copy bytes from one location to another.</summary>
  * <param name="dest">An array into which the bytes from source are copied in</param>
  * <param name="source">The source array</param>
@@ -332,6 +348,7 @@ native uuencode(dest[], const source[], numbytes, maxlength = sizeof (dest));
 native memcpy(dest[], const source[], index = 0, numbytes, maxlength = sizeof (dest));
 
 /**
+ * <library>string</library>
  * <summary>Compares two strings to see if they are the same.</summary>
  * <param name="string1">The first string to compare</param>
  * <param name="string2">The second string to compare</param>
