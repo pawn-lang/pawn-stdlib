@@ -1,3 +1,8 @@
+#if defined _time_included
+	#endinput
+#endif
+#define _time_included
+
 /**
  * <library name="time" description="Date/time functions.">
  * <license>
@@ -7,10 +12,6 @@
  * </library>
  */
 
- #if defined _time_included
-	#endinput
-#endif
-#define _time_included
 #pragma library Time
 
 /**

@@ -1,3 +1,8 @@
+#if defined _Float_included
+	#endinput
+#endif
+#define _Float_included
+
 /**
  * <library name="time" description="Float arithmetic.">
  * <license>
@@ -11,12 +16,7 @@
  * </library>
  */
 
-#if defined _Float_included
-	#endinput
-#endif
-#define _Float_included
 #pragma library Float
-
 #pragma rational Float
 
 /* Different methods of rounding */

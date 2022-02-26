@@ -1,3 +1,8 @@
+#if defined _file_included
+	#endinput
+#endif
+#define _file_included
+
 /**
  * <library name="file" description="File input/output functions.">
  * <license>
@@ -7,10 +12,6 @@
  * </library>
  */
 
-#if defined _file_included
-	#endinput
-#endif
-#define _file_included
 #pragma library File
 
 enum filemode

@@ -1,3 +1,8 @@
+#if defined _string_included
+	#endinput
+#endif
+#define _string_included
+
 /**
  * <library name="string" description="String functions.">
  * <license>
@@ -7,10 +12,6 @@
  * </library>
  */
 
-#if defined _string_included
-	#endinput
-#endif
-#define _string_included
 #pragma library String
 
 /**

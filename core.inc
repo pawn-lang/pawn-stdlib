@@ -1,3 +1,8 @@
+#if defined _core_included
+	#endinput
+#endif
+#define _core_included
+
 /**
  * <library name="core" description="Core functions.">
  * <license>
@@ -7,10 +12,6 @@
  * </library>
  */
 
-#if defined _core_included
-	#endinput
-#endif
-#define _core_included
 #pragma library Core
 
 /**

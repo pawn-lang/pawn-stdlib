@@ -1,3 +1,8 @@
+#if defined _datagram_included
+	#endinput
+#endif
+#define _datagram_included
+
 /**
  * <library name="datagram" description="Datagram sending/receiving.">
  * <license>
@@ -7,10 +12,6 @@
  * </library>
  */
 
-#if defined _datagram_included
-	#endinput
-#endif
-#define _datagram_included
 #pragma library DGram
 
 /**

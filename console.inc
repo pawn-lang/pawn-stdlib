@@ -1,3 +1,8 @@
+#if defined _console_included
+	#endinput
+#endif
+#define _console_included
+
 /**
  * <library name="console" description="Console output.">
  * <license>
@@ -7,10 +12,6 @@
  * </library>
  */
 
-#if defined _console_included
-	#endinput
-#endif
-#define _console_included
 #pragma library Console
 
 /**

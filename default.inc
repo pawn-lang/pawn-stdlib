@@ -1,3 +1,8 @@
+#if defined _default_included
+	#endinput
+#endif
+#define _default_included
+
 /**
  * <library name="default" description="Always included by the compiler.">
  * <license>
