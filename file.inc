@@ -14,6 +14,9 @@
 
 #pragma library File
 
+/**
+ * <library>file</library>
+ */
 enum filemode
 {
 	io_read,            /* file must exist */
@@ -21,13 +24,18 @@ enum filemode
 	io_readwrite,       /* opens an existing file, or creates a new file */
 	io_append,          /* appends to file (write-only) */
 }
+static stock filemode:_@filemode() { return filemode; }
 
+/**
+ * <library>file</library>
+ */
 enum seek_whence
 {
 	seek_start,
 	seek_current,
 	seek_end,
 }
+static stock seek_whence:_@seek_whence() { return seek_whence; }
 
 /**
  * <library>file</library>

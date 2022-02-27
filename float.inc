@@ -19,7 +19,10 @@
 #pragma library Float
 #pragma rational Float
 
-/* Different methods of rounding */
+/**
+ * <library>float</library>
+ * <summary>Different methods of rounding.</summary>
+ */
 enum floatround_method
 {
 	floatround_round,
@@ -28,13 +31,18 @@ enum floatround_method
 	floatround_tozero,
 	floatround_unbiased
 }
+static stock floatround_method:_@floatround_method() { return floatround_method; }
 
+/**
+ * <library>float</library>
+ */
 enum anglemode
 {
 	radian,
 	degrees,
 	grades
 }
+static stock anglemode:_@anglemode() { return anglemode; }
 
 /**
  * <library>float</library>
