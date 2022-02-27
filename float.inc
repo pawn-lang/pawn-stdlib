@@ -19,7 +19,6 @@
 #pragma library Float
 #pragma rational Float
 
-// Fixes a bug with two pawndoc comments before an enum.
 ///
 
 /**
@@ -35,6 +34,8 @@ enum floatround_method
 	floatround_unbiased
 }
 static stock floatround_method:_@floatround_method() { return floatround_method; }
+
+///
 
 /**
  * <library>float</library>

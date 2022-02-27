@@ -14,7 +14,6 @@
 
 #pragma library File
 
-// Fixes a bug with two pawndoc comments before an enum.
 ///
 
 /**
@@ -28,6 +27,8 @@ enum filemode
 	io_append,          /* appends to file (write-only) */
 }
 static stock filemode:_@filemode() { return filemode; }
+
+///
 
 /**
  * <library>file</library>
