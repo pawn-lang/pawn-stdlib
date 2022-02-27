@@ -293,7 +293,7 @@ native Float:operator=(oper) = float;
  */
 stock Float:operator++(Float:oper)
 {
-	return oper+1.0;
+	return oper + 1.0;
 }
 
 /**
@@ -301,7 +301,7 @@ stock Float:operator++(Float:oper)
  */
 stock Float:operator--(Float:oper)
 {
-	return oper-1.0;
+	return oper - 1.0;
 }
 
 /**
@@ -309,7 +309,7 @@ stock Float:operator--(Float:oper)
  */
 stock Float:operator-(Float:oper)
 {
-	return oper^Float:cellmin;                  /* IEEE values are sign/magnitude */
+	return oper ^ Float:cellmin;                /* IEEE values are sign/magnitude */
 }
 
 /**
