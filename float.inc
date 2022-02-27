@@ -19,6 +19,9 @@
 #pragma library Float
 #pragma rational Float
 
+// Fixes a bug with two pawndoc comments before an enum.
+///
+
 /**
  * <library>float</library>
  * <summary>Different methods of rounding.</summary>
