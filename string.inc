@@ -4,7 +4,7 @@
 #define _string_included
 
 /**
- * <library name="string" description="String functions.">
+ * <library name="string" summary="String functions.">
  * <license>
  *   (c) Copyright 2005, ITB CompuPhase
  *   This file is provided as is (no warranties).

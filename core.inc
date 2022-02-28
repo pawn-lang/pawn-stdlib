@@ -4,7 +4,7 @@
 #define _core_included
 
 /**
- * <library name="core" description="Core functions.">
+ * <library name="core" summary="Core functions.">
  * <license>
  *   (c) Copyright 1998-2005, ITB CompuPhase
  *   This file is provided as is (no warranties).

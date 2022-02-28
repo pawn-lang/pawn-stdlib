@@ -4,7 +4,7 @@
 #define _console_included
 
 /**
- * <library name="console" description="Console output.">
+ * <library name="console" summary="Console output.">
  * <license>
  *   (c) Copyright 1998-2011, ITB CompuPhase
  *   This file is provided as is (no warranties).

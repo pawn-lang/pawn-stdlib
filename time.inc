@@ -4,7 +4,7 @@
 #define _time_included
 
 /**
- * <library name="time" description="Date/time functions.">
+ * <library name="time" summary="Date/time functions.">
  * <license>
  *   (c) Copyright 2001-2005, ITB CompuPhase
  *   This file is provided as is (no warranties).

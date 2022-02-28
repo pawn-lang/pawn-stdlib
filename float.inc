@@ -4,7 +4,7 @@
 #define _Float_included
 
 /**
- * <library name="time" description="Float arithmetic.">
+ * <library name="time" summary="Float arithmetic.">
  * <license>
  *   (c) Copyright 1999, Artran, Inc.
  *   Written by Greg Garner (gmg@artran.com)

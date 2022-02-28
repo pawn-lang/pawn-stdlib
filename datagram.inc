@@ -4,7 +4,7 @@
 #define _datagram_included
 
 /**
- * <library name="datagram" description="Datagram sending/receiving.">
+ * <library name="datagram" summary="Datagram sending/receiving.">
  * <license>
  *   (c) Copyright 2005, ITB CompuPhase
  *   This file is provided as is (no warranties).

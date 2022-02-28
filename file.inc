@@ -4,7 +4,7 @@
 #define _file_included
 
 /**
- * <library name="file" description="File input/output functions.">
+ * <library name="file" summary="File input/output functions.">
  * <license>
  *   (c) Copyright 2004-2005, ITB CompuPhase
  *   This file is provided as is (no warranties).
