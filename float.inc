@@ -5,14 +5,20 @@
 
 /**
  * <library name="time" summary="Float arithmetic.">
- * <license>
- *   (c) Copyright 1999, Artran, Inc.
- *   Written by Greg Garner (gmg@artran.com)
- *   Modified in March 2001 to include user defined
- *   operators for the floating point functions.
- *
- *   This file is provided as is (no warranties).
- * </license>
+ *   <license>
+ *     (c) Copyright 1999, Artran, Inc.
+ *     Written by Greg Garner (gmg@artran.com)
+ *     Modified in March 2001 to include user defined
+ *     operators for the floating point functions.
+ *   
+ *     This file is provided as is (no warranties).
+ *   </license>
+ *   <summary pawndoc="true">
+ *     This library uses the enhanced <em>pawndoc.xsl</em> from
+ *     <a href="https://github.com/pawn-lang/pawndoc">pawn-lang/pawndoc</a>.
+ *     This XSL has features such as library and markdown support, and will not
+ *     render this message when used.
+ *   </summary>
  * </library>
  */
 
