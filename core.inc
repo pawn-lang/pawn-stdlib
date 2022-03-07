@@ -20,6 +20,8 @@
 
 #pragma library Core
 
+///
+
 /**
  * <library>core</library>
  * <summary>Returns the amount of memory available for the heap/stack in bytes.</summary>

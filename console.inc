@@ -20,6 +20,8 @@
 
 #pragma library Console
 
+///
+
 /**
  * <library>console</library>
  * <summary>Prints a string to the server console (not in-game chat) and logs (server_log.txt).</summary>
