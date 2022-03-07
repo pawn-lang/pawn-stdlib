@@ -20,7 +20,7 @@
 
 #pragma library File
 
-///
+/// 
 
 /**
  * <library>file</library>
@@ -34,7 +34,7 @@ enum filemode
 }
 static stock filemode:_@filemode() { return filemode; }
 
-///
+/// <p/>
 
 /**
  * <library>file</library>

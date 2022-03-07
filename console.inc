@@ -20,7 +20,7 @@
 
 #pragma library Console
 
-///
+/// <p/>
 
 /**
  * <library>console</library>

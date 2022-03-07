@@ -25,7 +25,7 @@
 #pragma library Float
 #pragma rational Float
 
-///
+/// <p/>
 
 /**
  * <library>float</library>
@@ -41,7 +41,7 @@ enum floatround_method
 }
 static stock floatround_method:_@floatround_method() { return floatround_method; }
 
-///
+/// <p/>
 
 /**
  * <library>float</library>
