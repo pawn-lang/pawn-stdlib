@@ -512,12 +512,12 @@ stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = 
  * <param name="value">The buffer into which to store the value.  If the key is not present in the
  * appropriate section of the INI file, the contents of parameter <c>defvalue</c> is copied into
  * this buffer.</param>
- * <param name="size">The (maximum) size of the value array in cells. For a packed string, one cell
+ * <param name="size">The (maximum) size of the value array in cells.  For a packed string, one cell
  * holds multiple characters.</param>
  * <param name="defvalue">The string to copy into parameter value in the case that the function
  * cannot read the field from the INI file.</param>
  * <param name="pack">If the pack parameter is false, the text is stored as an unpacked string and
- * the function parses UTF-8 encoding. When reading text in a packed string, no UTF-8
+ * the function parses UTF-8 encoding.  When reading text in a packed string, no UTF-8
  * interpretation occurs.</param>
  * <returns>The number of characters stored in parameter <c>value</c>.</returns>
  */
@@ -541,6 +541,12 @@ stock readcfg(const filename[] = "", const section[] = "", const key[], value[],
  */
 stock readcfgvalue(const filename[] = "", const section[] = "", const key[], defvalue = 0)
 {
+	new dest[16];
+	if (readcfg(filename, section, key, dest))
+	{
+		// Got a number.
+		return strval(dest);
+	}
 	return defvalue;
 }
 
@@ -573,6 +579,14 @@ stock bool:writecfg(const filename[] = "", const section[] = "", const key[], co
  */
 stock bool:writecfgvalue(const filename[] = "", const section[] = "", const key[], value)
 {
-	return false;
+	if (value == cellmin)
+	{
+		// There's also a bug in `format` with `cellmin`.
+		return writecfg(filename, section, key, "-2147483648");
+	}
+	// Don't use `valstr`, there's a bug with large numbers.
+	new dest[16];
+	__strformat(dest, sizeof (dest), "%d", value);
+	return writecfg(filename, section, key, dest);
 }
 
