@@ -510,6 +510,11 @@ forward bool:fmkdir(const name[]);
 
 /**
  * <library>file</library>
+ */
+static stock const __cfgdefault[] = "config.ini";
+
+/**
+ * <library>file</library>
  * <summary>Deletes a key or a section from an INI file.</summary>
  * <param name="filename">The name and path of the INI file.  If this parameter is not set, the
  * function uses the default name <c>"config.ini"</c>.</param>
@@ -523,9 +528,8 @@ forward bool:fmkdir(const name[]);
  */
 stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = "")
 {
-	static const configini[] = "config.ini";
 	// Open the cfg file, and a temp file for swap space.
-	new File:i = fopen(filename[0] ? filename : configini, io_read);
+	new File:i = fopen(filename[0] ? filename : __cfgdefault, io_read);
 	if (!i)
 	{
 		return false;
@@ -580,11 +584,11 @@ stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = 
 		}
 	}
 	fclose(i);
-	if (fremove(filename[0] ? filename : configini))
+	if (fremove(filename[0] ? filename : __cfgdefault))
 	{
 		len = ftell(o);
 		fseek(o);
-		insection = __fpartialcopy(o, len, filename[0] ? filename : configini);
+		insection = __fpartialcopy(o, len, filename[0] ? filename : __cfgdefault);
 		fclose(o);
 		return insection;
 	}
@@ -614,9 +618,8 @@ stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = 
  */
 stock readcfg(const filename[] = "", const section[] = "", const key[], value[], size = sizeof (value), const defvalue[] = "", bool:pack = false)
 {
-	static const configini[] = "config.ini";
 	// Open the cfg file, and a temp file for swap space.
-	new File:i = fopen(filename[0] ? filename : configini, io_read);
+	new File:i = fopen(filename[0] ? filename : __cfgdefault, io_read);
 	if (!i)
 	{
 		return false;
@@ -713,9 +716,8 @@ stock readcfgvalue(const filename[] = "", const section[] = "", const key[], def
  */
 stock bool:writecfg(const filename[] = "", const section[] = "", const key[], const value[])
 {
-	static const configini[] = "config.ini";
 	// Open the cfg file, and a temp file for swap space.
-	new File:i = fopen(filename[0] ? filename : configini, io_read);
+	new File:i = fopen(filename[0] ? filename : __cfgdefault, io_read);
 	if (!i)
 	{
 		return false;
@@ -805,11 +807,11 @@ stock bool:writecfg(const filename[] = "", const section[] = "", const key[], co
 		fwrite(o, value);
 		fwrite(o, "\r\n");
 	}
-	if (fremove(filename[0] ? filename : configini))
+	if (fremove(filename[0] ? filename : __cfgdefault))
 	{
 		len = ftell(o);
 		fseek(o);
-		insection = __fpartialcopy(o, len, filename[0] ? filename : configini);
+		insection = __fpartialcopy(o, len, filename[0] ? filename : __cfgdefault);
 		fclose(o);
 		return insection;
 	}
