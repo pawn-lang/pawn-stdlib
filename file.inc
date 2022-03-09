@@ -515,11 +515,6 @@ static stock const __cfgdefault[] = "config.ini";
 
 /**
  * <library>file</library>
- */
-static stock const __ftemp[] = "__ftemp";
-
-/**
- * <library>file</library>
  * <summary>Deletes a key or a section from an INI file.</summary>
  * <param name="filename">The name and path of the INI file.  If this parameter is not set, the
  * function uses the default name <c>"config.ini"</c>.</param>
@@ -539,7 +534,7 @@ stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = 
 	{
 		return false;
 	}
-	new File:o = fopen(__ftemp, io_write);
+	new File:o = ftemp();
 	if (!o)
 	{
 		fclose(i);
@@ -590,22 +585,12 @@ stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = 
 	fclose(i);
 	if (fremove(filename[0] ? filename : __cfgdefault))
 	{
+		fseek(o);
+		insection = __fpartialcopy(o, flength(o), filename[0] ? filename : __cfgdefault);
 		fclose(o);
-		if ((o = fopen(__ftemp, io_read)))
-		{
-			fseek(o, 0, seek_start);
-			insection = __fpartialcopy(o, flength(o), filename[0] ? filename : __cfgdefault);
-			fclose(o);
-		}
-		else
-		{
-			insection = false;
-		}
-		fremove(__ftemp);
 		return insection;
 	}
 	fclose(o);
-	fremove(__ftemp);
 	return false;
 }
 
@@ -756,7 +741,7 @@ stock bool:writecfg(const filename[] = "", const section[] = "", const key[], co
 	{
 		return false;
 	}
-	new File:o = fopen(__ftemp, io_write);
+	new File:o = ftemp();
 	if (!o)
 	{
 		fclose(i);
@@ -842,22 +827,12 @@ stock bool:writecfg(const filename[] = "", const section[] = "", const key[], co
 	}
 	if (fremove(filename[0] ? filename : __cfgdefault))
 	{
+		fseek(o);
+		insection = __fpartialcopy(o, flength(o), filename[0] ? filename : __cfgdefault);
 		fclose(o);
-		if ((o = fopen(__ftemp, io_read)))
-		{
-			//fseek(o, 0, seek_start);
-			insection = __fpartialcopy(o, flength(o), filename[0] ? filename : __cfgdefault);
-			fclose(o);
-		}
-		else
-		{
-			insection = false;
-		}
-		fremove(__ftemp);
 		return insection;
 	}
 	fclose(o);
-	fremove(__ftemp);
 	return false;
 }
 
