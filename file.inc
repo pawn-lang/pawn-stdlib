@@ -241,18 +241,6 @@ native fexist(const name[]);
 
 /**
  * <library>file</library>
- * <summary>Find a filename matching a pattern.</summary>
- * <param name="name">The string to hold the result in, returned as a packed string</param>
- * <param name="pattern">The pattern that should be matched.  May contain wildcards</param>
- * <param name="index">The number of the file, in case there are multiple matches (optional=<b><c>0</c></b>)</param>
- * <param name="size">The maximum size of parameter name (optional=<b><c>sizeof (name)</c></b>)</param>
- * <remarks>This function does not work in the current SA:MP version!</remarks>
- * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
- */
-native bool:fmatch(name[], const pattern[], index = 0, size = sizeof (name));
-
-/**
- * <library>file</library>
  * <summary>Return the size and the time stamp of a file.</summary>
  * <param name="name">The name of the file.</param>
  * <param name="size">If the function is successful, this param-eter holds the size of the file on return.</param>
@@ -469,4 +457,27 @@ forward diskfree(const volume[] = "");
  * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
  */
 forward bool:fattrib(const name[], timestamp = 0, attrib = 0x0F);
+
+/**
+ * <library>file</library>
+ * <summary>Find a filename matching a pattern.</summary>
+ * <param name="name">The string to hold the result in, returned as a packed string</param>
+ * <param name="pattern">The pattern that should be matched.  May contain wildcards</param>
+ * <param name="index">The number of the file, in case there are multiple matches (optional=<b><c>0</c></b>)</param>
+ * <param name="size">The maximum size of parameter name (optional=<b><c>sizeof (name)</c></b>)</param>
+ * <remarks>This function does not work in the current SA:MP version!</remarks>
+ * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
+ */
+forward bool:fmatch(name[], const pattern[], index = 0, size = sizeof (name));
+
+/**
+ * <library>file</library>
+ * <summary>Create a directory.</summary>
+ * <param name="name">The name of the directory to create, optionally including a full path.</param>
+ * <remarks>
+ * To delete the directory again, use <c>fremove</c>.  The directory must be empty before it can be removed.
+ * </remarks>
+ * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
+ */
+forward bool:fmkdir(const name[]);
 
