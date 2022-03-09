@@ -151,15 +151,15 @@ stock delay(milliseconds)
  */
 stock cvttimestamp(seconds1970, &year = 0, &month = 0, &day = 0, &hour = 0, &minute = 0, &second = 0)
 {
-	// Based on the amxtime.c code, with the same bugs...
+	// Based on the amxtime.c code, with some fixed bugs...
 	new days, seconds;
 	static monthdays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-	// Find the year
+	// Find the year.
 	for (year = 1970; ; ++year)
 	{
-		// Leap year check, fails for 2100.  Please don't be still using this code in 2100...
-		days = 365 + ((year & 0x03) == 0);
+		// Leap year check.
+		days = 365 + _:((year % 4) == 0) - _:((year % 100) == 0) + _:((year % 400) == 0);
 		seconds = days * 86400;
 		if (seconds - seconds1970 > 0)
 		{
