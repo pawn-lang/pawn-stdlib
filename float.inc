@@ -70,9 +70,22 @@ native Float:float(value);
  * <param name="string">The string to convert into a float</param>
  * <seealso name="floatround"/>
  * <seealso name="float"/>
+ * <seealso name="strfloat"/>
  * <returns>The requested float value.</returns>
  */
 native Float:floatstr(const string[]);
+
+/**
+ * <library>float</library>
+ * <summary>Convert from text (string) to floating point.</summary>
+ * <param name="string">A string containing a floating point number in characters.  This may be
+ * either a packed or unpacked string.  The string may specify a fractional part, for example
+ * c>"123.45"</c>.</param>
+ * <seealso name="float"/>
+ * <seealso name="floatstr"/>
+ * <returns>The value in the string, or zero if the string did not start with a valid number.</returns>
+ */
+native Float:strfloat(const string[]) = floatstr;
 
 /**
  * <library>float</library>
