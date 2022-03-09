@@ -20,6 +20,8 @@
 
 #pragma library Time
 
+/// <p/>
+
 /**
  * <library>time</library>
  * <summary>Get the current server time.</summary>
