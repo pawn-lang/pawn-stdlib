@@ -20,7 +20,7 @@
 
 #pragma library File
 
-/// 
+/// <p/>
 
 /**
  * <library>file</library>
@@ -243,4 +243,133 @@ native fexist(const name[]);
  * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
  */
 native bool:fmatch(name[], const pattern[], index = 0, size = sizeof (name));
+
+/**
+ * <library>file</library>
+ * <summary>Return the size and the time stamp of a file.</summary>
+ * <param name="name">The name of the file.</param>
+ * <param name="size">If the function is successful, this param-eter holds the size of the file on return.</param>
+ * <param name="timestamp">If the function is successful, this parameter holds the time of the last modification of the file on return.</param>
+ * <param name="attrib">If the function is successful, this parameter holds the file attributes.</param>
+ * <param name="inode">If the function is successful, this parameter holds inode number of the file.  An inode number is a number that uniquely identifies a file, and it usually indicates the physical position of (the start of) the file on the disk or memory card.</param>
+ * <remarks>
+ * In contrast to the function flength, this function does not need the file to be opened for querying its size.
+ * <p/>
+ * The time is in number of seconds since midnight at 1 January 1970: the start of the UNIX system epoch.
+ * <p/>
+ * The file attributes are a bit mask. The meaning of each bit depends on the underlying file system (e.g. FAT, NTFS, etx2 and others).
+ * </remarks>
+ * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
+ */
+
+stock bool:fstat(const name[], &size = 0, &timestamp = 0, &attrib = 0, &inode = 0)
+{
+	// Not supported.
+	timestamp = 0;
+	attrib = 0;
+	inode = 0;
+	new File:fhnd = fopen(name);
+	if (fhnd)
+	{
+		size = flength(fhnd);
+		fclose(fhnd);
+		return true;
+	}
+	return false;
+}
+
+/**
+ * <library>file</library>
+ * <summary>Rename a file.</summary>
+ * <param name="oldname">The current name of the file, optionally including a full path.</param>
+ * <param name="newname">The new name of the file, optionally including a full path.</param>
+ * <remarks>
+ * In addition to changing the name of the file, this function can also move the file to a different directory.
+ * </remarks>
+ * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
+ */
+
+stock bool:frename(const oldname[], const newname[])
+{
+	// Check the target doesn't exist.
+	if (fexist(newname))
+	{
+		return false;
+	}
+	// Try open the input file (the old name).
+	new
+		File:i = fopen(oldname, io_read),
+	if (!i)
+	{
+		return false;
+	}
+	// Try open the output file (the new name).
+	new
+		File:o = fopen(newname, io_write),
+	if (!o)
+	{
+		fclose(i);
+		return false;
+	}
+	// Create a byte buffer for the data.
+	new
+		buffer[256],
+		end = flength(i),
+		count = sizeof (buffer);
+	// Clamp the read size to the number of cells in the file.
+	if (count > end / cellbytes)
+	{
+		count = end / cellbytes;
+	}
+	// The last few bytes.
+	end &= cellbytes - 1;
+	do
+	{
+		count = fblockread(i, buffer, count);
+		fblockwrite(o, buffer, count);
+	}
+	while (count == sizeof (buffer));
+	// Clean up any trailing bytes.
+	while (end--)
+	{
+		fputchar(o, fgetchar(i, 0, false), false);
+	}
+	fclose(i);
+	fclose(o);
+	if (fremove(oldname))
+	{
+		return true;
+	}
+	// Couldn't delete the old version, so the rename failed.
+	fremove(newname);
+	return false;
+}
+
+/**
+ * <library>file</library>
+ * <summary>Returns the free disk space.</summary>
+ * <param name="volume">The name of the volume on systems that support multiple disks or multiple memory cards.  On single-volume systems, it is optional.</param>
+ * <remarks>
+ * The maximum size that can be supported 2048 GiB (2 terabyte).
+ * </remarks>
+ * <returns>The amount of free space in KiB.</returns>
+ */
+
+forward diskfree(const volume[] = "");
+
+/**
+ * <library>file</library>
+ * <summary>Set the file attributes.</summary>
+ * <param name="name">The name of the file.</param>
+ * <param name="timestamp">Time of the last modification of the file.  When this parameter is set to zero, the time stamp of the file is not changed.</param>
+ * <param name="attrib">A bit mask with the new attributes of the file.  When set to 0x0F, the attributes of the file are not changed.</param>
+ * <remarks>
+ * The time is in number of seconds since midnight at 1 January 1970: the start of the UNIX system epoch.
+ * <p/>
+ * The file attributes are a bit mask. The meaning of each bit depends on the underlying file system (e.g. FAT, NTFS, etx2 and others).
+ * </remarks>
+ * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
+ */
+
+forward bool:fattrib(const name[], timestamp = 0, attrib = 0x0F);
 
