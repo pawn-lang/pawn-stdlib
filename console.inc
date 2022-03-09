@@ -120,7 +120,7 @@ forward getchar(echo = true);
  * <param name="size"></param>
  * <param name="pack"></param>
  * <seealso name="getchar"/>
- * <return>true if the cursor moved and false if the requested position is invalid.</return>
+ * <return>The number of characters read, excluding the terminating null character.</return>
  * <remarks>Function <c>getstring</c> stops reading when either the enter key is typed or the
  * maximum length is reached.  The maximum length is in cells (not characters) and it includes a 
  * terminating null character.  The function can read both packed and unpacked strings; when reading
