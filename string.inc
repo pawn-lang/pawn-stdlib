@@ -400,6 +400,16 @@ native memcpy(dest[], const source[], index = 0, numbytes, maxlength = sizeof (d
  */
 stock bool:strequal(const string1[], const string2[], bool:ignorecase = false, length = cellmax)
 {
+	if (string1[0] == '\0')
+	{
+		// Only need to check the first character.
+		return string2[0] == '\0';
+	}
+	if (string2[0] == '\0')
+	{
+		// Because we already know that `string1` isn't the same.
+		return false;
+	}
 	return strcmp(string1, string2, ignorecase, length) == 0;
 }
 
