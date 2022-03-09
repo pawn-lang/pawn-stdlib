@@ -54,3 +54,82 @@ native getdate(&year = 0, &month = 0, &day = 0);
  */
 native tickcount(&granularity = 0);
 
+/**
+ * <library>time</library>
+ * <summary>A timer event occurred.</summary>
+ * <remarks>
+ * This function executes after the configured delay or interval expires.  See <c>settimer</c> to
+ * set the delay or interval.  Depending on the timing precision of the host, the call may occur
+ * later than the delay that was set.
+ * <p/>
+ * If the timer was set as a "single-shot", it must be ex plicitly set again for a next execution
+ * for the <c>@timer</c>function.  If the timer is set to be repetitive, <c>@timer</c> will continue
+ * to be called with the set interval until it is disabled with another call to <c>settimer</c>.
+ * </remarks>
+ * <returns>The return value of this function is currently ignored.</returns>
+ */
+forward @timer();
+
+/**
+ * <library>time</library>
+ */
+native __settimer(const callback[], milliseconds, bool:multishot) = SetTimer;
+
+/**
+ * <library>time</library>
+ */
+native __killtimer(id) = KillTimer;
+
+/**
+ * <library>time</library>
+ * <summary>Configure the event timer.</summary>
+ * <param name="milliseconds">The number of milliseconds to wait before calling the <c>@timer</c>
+ * callback function.  If the timer is repetitive, this is the interval.  When this parameter is 0
+ * (zero), the timer is shut off.</param>
+ * <param name="singleshot">If <c>false</c>, the timer is a repetitive timer; if <c>true</c> the
+ * timer is shut off after invoking the <c>@timer</c> event once.</param>
+ * <remarks>
+ * See the chapter "Usage" for an example of this function, and the <c>@timer</c> event function.
+ * </remarks>
+ * <returns>This function always returns 0.</returns>
+ */
+stock settimer(milliseconds, bool:singleshot = false)
+{
+	static id = 0;
+	if (id)
+	{
+		__killtimer(id);
+	}
+	id = 0;
+	if (milliseconds)
+	{
+		id = __settimer("@timer", milliseconds, !singleshot);
+	}
+	return 0;
+}
+
+/**
+ * <library>time</library>
+ * <summary>Halts execution a number of milliseconds.</summary>
+ * <param name="milliseconds">The delay, in milliseconds.</param>
+ * <remarks>
+ * On some platforms, the <c>sleep</c> instruction also delays for a given number of milliseconds.
+ * The difference between the <c>sleep</c> instruction and the <c>delay</c> function is that the
+ * <c>delay</c> function does not yield events and the <c>sleep</c> instruction typically yields.
+ * When yielding events, any pending events are handled.  As a result, the <c>delay</c> function
+ * waits without handling any pending events and the <c>sleep</c> instruction waits and deals with
+ * events.
+ * </remarks>
+ * <returns>This function always returns 0.</returns>
+ */
+stock delay(milliseconds)
+{
+	// This arrangement accounts for integer overflows.
+	new end = tickcount() + milliseconds;
+	while (tickcount() - end < 0)
+	{
+		// Do nothing.
+	}
+	return 0;
+}
+

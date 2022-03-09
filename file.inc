@@ -156,14 +156,6 @@ native bool:fputchar(File:handle, value, bool:utf8 = true);
 
 /**
  * <library>file</library>
- * <summary>Reads a single character from a file.</summary>
- * <param name="handle">The file handle to use; returned by <a href="#fopen">fopen</a></param>
- * <param name="value">This parameter has no use, just keep it "0"</param>
- * <param name="utf8">If true, read a character as UTF-8, otherwise as extended ASCII (optional=<b><c>true</c></b>)</param>
- * <remarks>Using an <b>invalid handle</b> will crash your server! Get a <b>valid handle</b> by using
- * <a href="#fopen">fopen</a> or <a href="#ftemp">ftemp</a>.</remarks>
- * <returns>If succeed, it returns the extended ASCII or UTF-8 value of the character at the current
- * position in the file, otherwise EOF (end of file).</returns>
  */
 native __fgetchar(File:handle, value, bool:utf8 = true) = fgetchar;
 
@@ -295,14 +287,6 @@ stock bool:fstat(const name[], &size = 0, &timestamp = 0, &attrib = 0, &inode = 
 
 /**
  * <library>file</library>
- * <summary>Abstract file copy routine.</summary>
- * <param name="i">The open data source.</param>
- * <param name="end">How much of the input to read, from the current point.</param>
- * <param name="newname">The new name of the file, optionally including a full path.</param>
- * <remarks>
- * This exists because several other functions use the same core alorithm for copying a file.
- * </remarks>
- * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
  */
 
 static stock bool:fpartialcopy(File:i, end, const newname[])
