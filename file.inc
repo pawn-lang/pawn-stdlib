@@ -281,7 +281,7 @@ stock bool:fstat(const name[], &size = 0, &timestamp = 0, &attrib = 0, &inode = 
 /**
  * <library>file</library>
  */
-static stock bool:fpartialcopy(File:i, end, const newname[])
+static stock bool:__fpartialcopy(File:i, end, const newname[])
 {
 	// Try open the output file (the new name).
 	new File:o = fopen(newname, io_write),
@@ -291,12 +291,8 @@ static stock bool:fpartialcopy(File:i, end, const newname[])
 	}
 	// Create a byte buffer for the data.
 	new buffer[256];
-	new count = sizeof (buffer);
 	// Clamp the read size to the number of cells in the file.
-	if (count > end / cellbytes)
-	{
-		count = end / cellbytes;
-	}
+	new count = min(sizeof (buffer), end / cellbytes);
 	// The last few bytes.
 	end &= cellbytes - 1;
 	// Only loop as long as we read a full block.  Partials mean the end.  Might
@@ -339,7 +335,7 @@ stock bool:frename(const oldname[], const newname[])
 	{
 		return false;
 	}
-	new bool:ret = fpartialcopy(i, flength(i), newname);
+	new bool:ret = __fpartialcopy(i, flength(i), newname);
 	fclose(i);
 	if (ret && fremove(oldname))
 	{
@@ -368,7 +364,7 @@ stock bool:fcopy(const source[], const target[])
 	{
 		return false;
 	}
-	new bool:ret = fpartialcopy(i, flength(i), target);
+	new bool:ret = __fpartialcopy(i, flength(i), target);
 	fclose(i);
 	return ret;
 }
