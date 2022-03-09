@@ -606,7 +606,67 @@ stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = 
  */
 stock readcfg(const filename[] = "", const section[] = "", const key[], value[], size = sizeof (value), const defvalue[] = "", bool:pack = false)
 {
-	return 0;
+		static const configini[] = "config.ini";
+	// Open the cfg file, and a temp file for swap space.
+	new File:i = fopen(filename[0] ? filename : configini, io_read);
+	if (!i)
+	{
+		return false;
+	}
+	// Max line length.
+	new sectionlen = strlen(section);
+	new keylen = strlen(key);
+	new line[FCFG_MAX_LINE_LENGTH];
+	new bool:insection = sectionlen == 0;
+	new len;
+	while ((len = fread(i, line)))
+	{
+		if (insection)
+		{
+			if (line[0] == '[')
+			{
+				// The correction section ended, so we didn't find the value.
+				break;
+			}
+			else if (strcmp(line, key, false, keylen) == 0 && (line[keylen] == ':' || line[keylen] == '='))
+			{
+				// Found the value.  Remove the newline characters.
+				while (line[--len] <= ' ')
+				{
+					line[len] = '\0';
+				}
+				if (pack)
+				{
+					strpack(value, line[keylen + 1], size)
+				}
+				else
+				{
+					strunpack(value, line[keylen + 1], size)
+				}
+				fclose(i);
+				return min(len - keylen - 1, size - 1);
+			}
+		}
+		else
+		{
+			// Not in a section before, are we now?
+			if (sectionlen && (line[0] == '[' && strcmp(line[1], section, false, sectionlen) == 0 && line[sectionlen + 1] == ']'))
+			{
+				// New correct section.
+				insection = true;
+			}
+		}
+	}
+	fclose(i);
+	if (pack)
+	{
+		strpack(value, defvalue, size)
+	}
+	else
+	{
+		strunpack(value, defvalue, size)
+	}
+	return min(strlen(defvalue), size - 1);
 }
 
 /**
@@ -723,6 +783,7 @@ stock bool:writecfg(const filename[] = "", const section[] = "", const key[], co
 			}
 		}
 	}
+	fclose(i);
 	if (!written)
 	{
 		// Didn't find the correct section, or the correct one ended.
@@ -738,7 +799,6 @@ stock bool:writecfg(const filename[] = "", const section[] = "", const key[], co
 		fwrite(o, value);
 		fwrite(o, "\r\n");
 	}
-	fclose(i);
 	if (fremove(filename[0] ? filename : configini))
 	{
 		len = ftell(o);
