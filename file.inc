@@ -646,6 +646,108 @@ stock readcfgvalue(const filename[] = "", const section[] = "", const key[], def
  */
 stock bool:writecfg(const filename[] = "", const section[] = "", const key[], const value[])
 {
+	static const configini[] = "config.ini";
+	// Open the cfg file, and a temp file for swap space.
+	new File:i = fopen(filename[0] ? filename : configini, io_read);
+	if (!i)
+	{
+		return false;
+	}
+	new File:o = ftemp();
+	if (!o)
+	{
+		fclose(i);
+		return false;
+	}
+	// Max line length.
+	new sectionlen = strlen(section);
+	new keylen = strlen(key);
+	new line[FCFG_MAX_LINE_LENGTH];
+	new bool:insection = sectionlen == 0;
+	new bool:written = false;
+	new len;
+	while ((len = fread(i, line)))
+	{
+		if (insection)
+		{
+			if (line[0] == '[')
+			{
+				if (!written)
+				{
+					// Add the new key to the end of the current section.
+					fwrite(o, key);
+					fwrite(o, "=");
+					fwrite(o, value);
+					fwrite(o, "\r\n");
+					written = true;
+				}
+				// New section, so the end of the old one.
+				insection = false;
+				fwrite(o, line);
+			}
+			else if (strcmp(line, key, false, keylen) == 0 && (line[keylen] == ':' || line[keylen] == '='))
+			{
+				if (!written)
+				{
+					// Found the key.  Replace it.
+					fwrite(o, key);
+					fwrite(o, "=");
+					fwrite(o, value);
+					fwrite(o, "\r\n");
+					written = true;
+				}
+			}
+			else
+			{
+				// Else copy this line.
+				fwrite(o, line);
+			}
+		}
+		else
+		{
+			// Not in a section before, are we now?
+			if (sectionlen && (line[0] == '[' && strcmp(line[1], section, false, sectionlen) == 0 && line[sectionlen + 1] == ']'))
+			{
+				// New correct section.
+				insection = true;
+				if (keylen)
+				{
+					// Not deleting the section, so keep the header.
+					fwrite(o, line);
+				}
+			}
+			else
+			{
+				// Not in the correct section, so keep the line.
+				fwrite(o, line);
+			}
+		}
+	}
+	if (!written)
+	{
+		// Didn't find the correct section, or the correct one ended.
+		if (!insection && sectionlen)
+		{
+			fwrite(o, "[");
+			fwrite(o, section);
+			fwrite(o, "]");
+			fwrite(o, "\r\n");
+		}
+		fwrite(o, key);
+		fwrite(o, "=");
+		fwrite(o, value);
+		fwrite(o, "\r\n");
+	}
+	fclose(i);
+	if (fremove(filename[0] ? filename : configini))
+	{
+		len = ftell(o);
+		fseek(o);
+		insection = __fpartialcopy(o, len, filename[0] ? filename : configini);
+		fclose(o);
+		return insection;
+	}
+	fclose(o);
 	return false;
 }
 
