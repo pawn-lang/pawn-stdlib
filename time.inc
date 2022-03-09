@@ -147,7 +147,7 @@ stock delay(milliseconds)
  * <remarks>
  * Some file and system functions return time-stamps as the number of seconds since midnight, 1
  * January 1970, which is the start of the UNIX system epoch.  This function allows to convert these
- * time stamps into date and time fields.
+ * time stamps into date and time fields.  <c>cvttimestamp</c> = <em>ConVerT TIMESTAMP</em>.
  * </remarks>
  * <returns>This function always returns 0.</returns>
  */
