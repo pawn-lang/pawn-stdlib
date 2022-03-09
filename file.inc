@@ -174,6 +174,12 @@ stock fgetchar(File:handle, bool:utf8 = true)
 	return __fgetchar(handle, _:utf8, utf8);
 }
 
+// Backwards-compatibility trick.  Gives a warning about the number of parameters being wrong, but
+// swaps the parameters around so the correct one is used.  Only happens when three parameters are
+// given instead of two, and uses a pre-processor deferral trick to prevent recursion.
+#define fgetchar(%0,%1,%2) fgetchar __fgetchar_DEFER(%0,%2,%1)
+#define __fgetchar_DEFER
+
 /**
  * <library>file</library>
  * <summary>Write data to a file in binary format, while ignoring line brakes and encoding.</summary>
