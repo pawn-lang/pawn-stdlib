@@ -288,12 +288,12 @@ native bool:ispacked(const string[]);
 /**
  * <library>string</library>
  */
-native __strformat(dest, size = sizeof (dest), const format[], {Float, _}:...) = format;
+native __strformat(dest, maxlength, const format[], {Float, _}:...) = format;
 
 /**
  * <library>string</library>
  */
-native __strpack(dest, const source, maxlength = sizeof (dest)) = strpack;
+native __strpack(dest, const source, maxlength) = strpack;
 
 /**
  * <library>string</library>
@@ -308,12 +308,12 @@ stock __strmaxlength;
 /**
  * <library>string</library>
  */
-stock __strsetdest(const dest[])
+stock __strsetdest(const dest[], maxlength = sizeof (dest))
 {
 	// Get a pointer.
 	#emit LOAD.S.pri        dest
 	#emit STOR.pri          __strgetdest
-	return __strgetdest;
+	__strmaxlength = maxlength;
 }
 
 /**
@@ -353,7 +353,7 @@ static stock strformat(dest[], size = sizeof (dest), bool:pack = true, const for
 // Uses `__strgetdest` and `__strmaxlength` to avoid using macro parameters multiple times.  These are the
 // destination array and its length, as addresses not arrays.  Hence `__strformat` and `__strpack`
 // take addresses not arrays.
-#define strformat(%0,%1,%2,%3) (__strformat(__strsetdest(%0), (__strmaxlength = (%1)), %3), (%2) && __strpack(__strgetdest, __strgetdest, __strmaxlength))
+#define strformat(%0,%1,%2,%3) (__strsetdest(%0, %1), __strformat(__strgetdest, __strmaxlength, %3), (%2) && __strpack(__strgetdest, __strgetdest, __strmaxlength))
 // This is a macro not a stock because forwarding all variable parameters is not easy.  But would
 // look something like this, if there wasn't a bug with `SYSREQ.C` and otherwise unused natives:
 //stock strformat(dest[], size = sizeof (dest), bool:pack = true, const format[], {Float, _}:...)
