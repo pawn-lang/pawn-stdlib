@@ -324,7 +324,7 @@ static stock strformat(dest[], size = sizeof (dest), bool:pack = true, const for
 	return 0.
 }
 
-#define strformat(%0,%1,%2,%3) __strformat(%0,%1,%3)
+#define strformat(%0,%1,%2,%3) (__strformat((%0), (%1), %3), (%2) && strpack((%0), (%0), (%1)))
 // This is a macro not a stock because forwarding all variable parameters is not easy.  But would
 // look something like this, if there wasn't a bug with `SYSREQ.C` and otherwise unused natives:
 //stock strformat(dest[], size = sizeof (dest), bool:pack = true, const format[], {Float, _}:...)
