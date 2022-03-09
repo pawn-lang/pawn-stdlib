@@ -289,9 +289,41 @@ native bool:ispacked(const string[]);
  * <library>string</library>
  */
 native __strformat(dest[], size = sizeof (dest), const format[], {Float, _}:...) = format;
-/*
-native strformat(dest[], size = sizeof (dest), bool:pack = true, const format[], {Fixed, Float, _}:...);
-*/
+
+/**
+ * <library>string</library>
+ * <summary>Convert values to text.</summary>
+ * <param name="dest">The string that will contain the formatted result.</param>
+ * <param name="size">The maximum number of <em>cells</em> that the dest parameter can hold. This value includes the zero terminator.</param>
+ * <param name="pack">If <c>true</c>, the string in <c>dest</c> will become a packed string. Otherwise, the string in dest will be unpacked.</param>
+ * <param name="format">The string to store in <c>dest</c>, which may contain placeholders (see the notes below).</param>
+ * <param name="...">The parameters for the placeholders.  These values may be untagged, weakly tagged, or tagged as rational values.</param>
+ * <remarks>
+ * The format parameter is a string that may contain embedded placeholder codes:
+ * <ul>
+ * <li><c>%c</c>store a character at this position</li>
+ * <li><c>%d</c>store a number at this position in decimal radix</li>
+ * <li><c>%f</c>store a floating point number at this position (for implementations that support floating point)</li>
+ * <li><c>%q</c>store a fixed point number at this position</li>
+ * <li><c>%r</c>same as either <c>%f</c> or <c>%q</c> (for compatibility with other implementations of PAWN)</li>
+ * <li><c>%s</c>store a character string at this position</li>
+ * <li><c>%x</c>store a number at this position in hexadecimal radix</li>
+ * The values for the placeholders follow as parameters in the call.
+ * <p/>
+ * You may optionally put a number between the <c>"%"</c> and the letter of the placeholder code.
+ * This number indicates the field width; if the size of the parameter to print at the position of
+ * the placeholder is smaller than the field width, the field is expanded with spaces.
+ * <p/>
+ * The <c>strformat</c> function works similarly to the "C" function sprintf.
+ * </remarks>
+ * <returns>This function always returns 0.</returns>
+ */
+static stock strformat(dest[], size = sizeof (dest), bool:pack = true, const format[], {Fixed, Float, _}:...)
+{
+	// For documentation only.
+	return 0.
+}
+
 #define strformat(%0,%1,%2,%3) __strformat(%0,%1,%3)
 // This is a macro not a stock because forwarding all variable parameters is not easy.  But would
 // look something like this, if there wasn't a bug with `SYSREQ.C` and otherwise unused natives:

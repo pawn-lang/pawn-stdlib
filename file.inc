@@ -268,7 +268,6 @@ native bool:fmatch(name[], const pattern[], index = 0, size = sizeof (name));
  * </remarks>
  * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
  */
-
 stock bool:fstat(const name[], &size = 0, &timestamp = 0, &attrib = 0, &inode = 0)
 {
 	// Not supported.
@@ -288,7 +287,6 @@ stock bool:fstat(const name[], &size = 0, &timestamp = 0, &attrib = 0, &inode = 
 /**
  * <library>file</library>
  */
-
 static stock bool:fpartialcopy(File:i, end, const newname[])
 {
 	// Try open the output file (the new name).
@@ -334,7 +332,6 @@ static stock bool:fpartialcopy(File:i, end, const newname[])
  * </remarks>
  * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
  */
-
 stock bool:frename(const oldname[], const newname[])
 {
 	// Check the target doesn't exist.
@@ -369,7 +366,6 @@ stock bool:frename(const oldname[], const newname[])
  * </remarks>
  * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
  */
-
 stock bool:fcopy(const source[], const target[])
 {
 	// Try open the input file (the old name).
@@ -395,7 +391,6 @@ stock bool:fcopy(const source[], const target[])
  * </remarks>
  * <returns>The 32-bit CRC value of the file, or zero if the file cannot be opened.</returns>
  */
-
 stock filecrc(const name[])
 {
 	static crcTable[256] = {
@@ -458,7 +453,6 @@ stock filecrc(const name[])
  * </remarks>
  * <returns>The amount of free space in KiB.</returns>
  */
-
 forward diskfree(const volume[] = "");
 
 /**
@@ -474,6 +468,5 @@ forward diskfree(const volume[] = "");
  * </remarks>
  * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
  */
-
 forward bool:fattrib(const name[], timestamp = 0, attrib = 0x0F);
 
