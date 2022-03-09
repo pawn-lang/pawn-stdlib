@@ -308,7 +308,7 @@ stock __strmaxlength;
 /**
  * <library>string</library>
  */
-stock __strsetdest(const dest[], maxlength = sizeof (dest))
+stock __strsetdest(dest[], maxlength = sizeof (dest))
 {
 	// Get a pointer.
 	#emit LOAD.S.pri        dest
