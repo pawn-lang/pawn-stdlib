@@ -18,6 +18,9 @@
  * </library>
  */
 
+#include "core"
+#include "string"
+
 #pragma library File
 
 /// <p/>
@@ -157,7 +160,7 @@ native bool:fputchar(File:handle, value, bool:utf8 = true);
 /**
  * <library>file</library>
  */
-native __fgetchar(File:handle, value, bool:utf8 = true) = fgetchar;
+native __fgetcharthree(File:handle, value, bool:utf8 = true) = fgetchar;
 
 /**
  * <library>file</library>
@@ -169,16 +172,17 @@ native __fgetchar(File:handle, value, bool:utf8 = true) = fgetchar;
  * <returns>If succeed, it returns the extended ASCII or UTF-8 value of the character at the current
  * position in the file, otherwise EOF (end of file).</returns>
  */
-stock fgetchar(File:handle, bool:utf8 = true)
+stock __fgetchartwo(File:handle, bool:utf8 = true)
 {
-	return __fgetchar(handle, _:utf8, utf8);
+	return __fgetcharthree(handle, _:utf8, utf8);
 }
 
 // Backwards-compatibility trick.  Gives a warning about the number of parameters being wrong, but
 // swaps the parameters around so the correct one is used.  Only happens when three parameters are
 // given instead of two, and uses a pre-processor deferral trick to prevent recursion.
-#define fgetchar(%0,%1,%2) fgetchar __fgetchar_DEFER(%0,%2,%1)
-#define __fgetchar_DEFER
+#define fgetchar(%0) (__fgetchartwo(%0)__fgetchar)
+#define __fgetchartwo(%0,%1,%2)__fgetchar) __fgetchartwo(%0,%2,%1))
+#define __fgetchar
 
 /**
  * <library>file</library>
@@ -307,15 +311,15 @@ static stock __fbuf[FCFG_MAX_LINE_LENGTH];
 static stock bool:__fpartialcopy(File:i, end, const newname[])
 {
 	// Try open the output file (the new name).
-	new File:o = fopen(newname, io_write),
+	new File:o = fopen(newname, io_write);
 	if (!o)
 	{
 		return false;
 	}
 	// Clamp the read size to the number of cells in the file.
-	new count = min(sizeof (__fbuf), end / cellbytes);
+	new count = min(sizeof (__fbuf), end / (cellbits / 8));
 	// The last few bytes.
-	end &= cellbytes - 1;
+	end &= (cellbits / 8) - 1;
 	// Only loop as long as we read a full block.  Partials mean the end.  Might
 	// do an extra read if `count` starts out as `0`, but that only happens on
 	// files less than 4 bytes long and doesn't matter anyway.
@@ -351,7 +355,7 @@ stock bool:frename(const oldname[], const newname[])
 		return false;
 	}
 	// Try open the input file (the old name).
-	new File:i = fopen(oldname, io_read),
+	new File:i = fopen(oldname, io_read);
 	if (!i)
 	{
 		return false;
@@ -380,7 +384,7 @@ stock bool:frename(const oldname[], const newname[])
 stock bool:fcopy(const source[], const target[])
 {
 	// Try open the input file (the old name).
-	new File:i = fopen(source, io_read),
+	new File:i = fopen(source, io_read);
 	if (!i)
 	{
 		return false;
@@ -438,7 +442,7 @@ stock filecrc(const name[])
 		0xBDBDF21C, 0xCABAC28A, 0x53B39330, 0x24B4A3A6, 0xBAD03605, 0xCDD70693, 0x54DE5729, 0x23D967BF,
 		0xB3667A2E, 0xC4614AB8, 0x5D681B02, 0x2A6F2B94, 0xB40BBE37, 0xC30C8EA1, 0x5A05DF1B, 0x2D02EF8D
 	};
-	new File:i = fopen(name, io_read),
+	new File:i = fopen(name, io_read);
 	if (!i)
 	{
 		return 0;
