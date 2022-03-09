@@ -280,6 +280,55 @@ stock bool:fstat(const name[], &size = 0, &timestamp = 0, &attrib = 0, &inode = 
 
 /**
  * <library>file</library>
+ * <summary>Abstract file copy routine.</summary>
+ * <param name="i">The open data source.</param>
+ * <param name="end">How much of the input to read, from the current point.</param>
+ * <param name="newname">The new name of the file, optionally including a full path.</param>
+ * <remarks>
+ * This exists because several other functions use the same core alorithm for copying a file.
+ * </remarks>
+ * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
+ */
+
+static stock bool:fpartialcopy(File:i, end, const newname[])
+{
+	// Try open the output file (the new name).
+	new
+		File:o = fopen(newname, io_write),
+	if (!o)
+	{
+		return false;
+	}
+	// Create a byte buffer for the data.
+	new
+		buffer[256],
+		count = sizeof (buffer);
+	// Clamp the read size to the number of cells in the file.
+	if (count > end / cellbytes)
+	{
+		count = end / cellbytes;
+	}
+	// The last few bytes.
+	end &= cellbytes - 1;
+	// Only loop as long as we read a full block.  Partials mean the end.  Might
+	// do an extra read if `count` starts out as `0`, but that only happens on
+	// files less than 4 bytes long and doesn't matter anyway.
+	do
+	{
+		count = fblockread(i, buffer, count);
+		fblockwrite(o, buffer, count);
+	}
+	while (count == sizeof (buffer));
+	// Clean up any trailing bytes.
+	while (end--)
+	{
+		fputchar(o, fgetchar(i, 0, false), false);
+	}
+	return fclose(i);
+}
+
+/**
+ * <library>file</library>
  * <summary>Rename a file.</summary>
  * <param name="oldname">The current name of the file, optionally including a full path.</param>
  * <param name="newname">The new name of the file, optionally including a full path.</param>
@@ -303,46 +352,40 @@ stock bool:frename(const oldname[], const newname[])
 	{
 		return false;
 	}
-	// Try open the output file (the new name).
-	new
-		File:o = fopen(newname, io_write),
-	if (!o)
-	{
-		fclose(i);
-		return false;
-	}
-	// Create a byte buffer for the data.
-	new
-		buffer[256],
-		end = flength(i),
-		count = sizeof (buffer);
-	// Clamp the read size to the number of cells in the file.
-	if (count > end / cellbytes)
-	{
-		count = end / cellbytes;
-	}
-	// The last few bytes.
-	end &= cellbytes - 1;
-	do
-	{
-		count = fblockread(i, buffer, count);
-		fblockwrite(o, buffer, count);
-	}
-	while (count == sizeof (buffer));
-	// Clean up any trailing bytes.
-	while (end--)
-	{
-		fputchar(o, fgetchar(i, 0, false), false);
-	}
+	new bool:ret = fpartialcopy(i, flength(i), newname);
 	fclose(i);
-	fclose(o);
-	if (fremove(oldname))
+	if (ret && fremove(oldname))
 	{
 		return true;
 	}
 	// Couldn't delete the old version, so the rename failed.
 	fremove(newname);
 	return false;
+}
+
+/**
+ * <library>file</library>
+ * <summary>Copy a file.</summary>
+ * <param name="source">The name of the (existing) file that must be copied, optionally including a path.</param>
+ * <param name="target">The name of the new file, optionally including a full path.</param>
+ * <remarks>
+ * If the target file already exists, it is overwritten.
+ * </remarks>
+ * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
+ */
+
+stock bool:fcopy(const source[], const target[])
+{
+	// Try open the input file (the old name).
+	new
+		File:i = fopen(oldname, io_read),
+	if (!i)
+	{
+		return false;
+	}
+	new bool:ret = fpartialcopy(i, flength(i), newname);
+	fclose(i);
+	return ret;
 }
 
 /**
