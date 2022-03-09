@@ -224,8 +224,22 @@ native fblockread(File:handle, buffer[], size = sizeof (buffer));
  * position must be zero or negative).</li>
  *   </ul>
  * </remarks>
+ * <returns>The new position, relative to the start of the file.</returns>
  */
 native fseek(File:handle, position = 0, seek_whence:whence = seek_start);
+
+/**
+ * <library>file</library>
+ * <summary>Get the current position in the file.</summary>
+ * <param name="handle">The file handle to use.  Returned by <a href="#fopen">fopen</a></param>
+ * <returns>The current position, relative to the start of the file.</returns>
+ */
+stock ftell(File:handle)
+{
+	return fseek(handle, 0, seek_current);
+}
+
+#define ftell(%0) fseek((%0), 0, seek_current)
 
 /**
  * <library>file</library>
@@ -483,6 +497,8 @@ forward bool:fmatch(name[], const pattern[], index = 0, size = sizeof (name));
  */
 forward bool:fmkdir(const name[]);
 
+#if !defined FCFG_MAX_LINE_LENGTH (256)
+
 /**
  * <library>file</library>
  * <summary>Deletes a key or a section from an INI file.</summary>
@@ -498,6 +514,73 @@ forward bool:fmkdir(const name[]);
  */
 stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = "")
 {
+	static const configini[] = "config.ini";
+	// Open the cfg file, and a temp file for swap space.
+	new File:i = fopen(filename[0] ? filename : configini, io_read);
+	if (!i)
+	{
+		return false;
+	}
+	new File:o = ftemp();
+	if (!o)
+	{
+		fclose(i);
+		return false;
+	}
+	// Max line length.
+	new sectionlen = strlen(section);
+	new keylen = strlen(key);
+	new line[FCFG_MAX_LINE_LENGTH];
+	new bool:insection = sectionlen == 0;
+	new len;
+	while ((len = fread(i, line)))
+	{
+		if (insection)
+		{
+			if (line[0] == '[')
+			{
+				// New section, so the end of the old one.
+				insection = false;
+				fwrite(o, line);
+			}
+			else if (keylen && !(strcmp(line, key, false, keylen) == 0 && (line[keylen] == ':' || line[keylen] == '=')))
+			{
+				// This isn't the key we're deleting.  I could use DeMorgan on the line above, but
+				// I think it is clearer this way.  It checks that the key isn't an exact match.
+				fwrite(o, line);
+			}
+			// Else don't copy this line.
+		}
+		else
+		{
+			// Not in a section before, are we now?
+			if (sectionlen && (line[0] == '[' && strcmp(line[1], section, false, sectionlen) == 0 && line[sectionlen + 1] == ']'))
+			{
+				// New correct section.
+				insection = true;
+				if (keylen)
+				{
+					// Not deleting the section, so keep the header.
+					fwrite(o, line);
+				}
+			}
+			else
+			{
+				// Not in the correct section, so keep the line.
+				fwrite(o, line);
+			}
+		}
+	}
+	fclose(i);
+	if (fremove(filename[0] ? filename : configini))
+	{
+		len = ftell(o);
+		fseek(o);
+		insection = __fpartialcopy(o, len, filename[0] ? filename : configini);
+		fclose(o);
+		return insection;
+	}
+	fclose(o);
 	return false;
 }
 
