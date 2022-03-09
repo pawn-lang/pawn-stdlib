@@ -716,6 +716,27 @@ stock readcfgvalue(const filename[] = "", const section[] = "", const key[], def
  */
 stock bool:writecfg(const filename[] = "", const section[] = "", const key[], const value[])
 {
+	// First time writing.
+	if (!fexist(filename[0] ? filename : __cfgdefault))
+	{
+		new File:o = fopen(filename[0] ? filename : __cfgdefault, io_write);
+		if (!o)
+		{
+			return false;
+		}
+		if (section[0])
+		{
+			fwrite(o, "[");
+			fwrite(o, section);
+			fwrite(o, "]");
+			fwrite(o, "\r\n");
+		}
+		fwrite(o, key);
+		fwrite(o, "=");
+		fwrite(o, value);
+		fwrite(o, "\r\n");
+		return fclose(o);
+	}
 	// Open the cfg file, and a temp file for swap space.
 	new File:i = fopen(filename[0] ? filename : __cfgdefault, io_read);
 	if (!i)
