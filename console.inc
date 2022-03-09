@@ -111,7 +111,7 @@ forward clrscr();
  * <seealso name="getstring"/>
  * <return>The numeric code for the character that is read (this is usually the ASCII code).</return>
  */
-forward getchar(echo = true);
+forward getchar(bool:echo = true);
 
 /**
  * <library>console</library>
