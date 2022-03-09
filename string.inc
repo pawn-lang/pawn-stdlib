@@ -318,6 +318,14 @@ stock __strsetdest(dest[], maxlength = sizeof (dest))
 
 /**
  * <library>string</library>
+ */
+stock bool:__strpacked(bool:pack = true)
+{
+	return pack;
+}
+
+/**
+ * <library>string</library>
  * <summary>Convert values to text.</summary>
  * <param name="dest">The string that will contain the formatted result.</param>
  * <param name="size">The maximum number of <em>cells</em> that the dest parameter can hold. This value includes the zero terminator.</param>
@@ -353,7 +361,7 @@ static stock strformat(dest[], size = sizeof (dest), bool:pack = true, const for
 // Uses `__strgetdest` and `__strmaxlength` to avoid using macro parameters multiple times.  These are the
 // destination array and its length, as addresses not arrays.  Hence `__strformat` and `__strpack`
 // take addresses not arrays.
-#define strformat(%0,%1,%2,%3) (__strsetdest(%0, %1), __strformat(__strgetdest, __strmaxlength, %3), (%2) && __strpack(__strgetdest, __strgetdest, __strmaxlength))
+#define strformat(%0,%1,%2,%3) (__strsetdest(%0, %1), __strformat(__strgetdest, __strmaxlength, %3), __strpacked(%2) && __strpack(__strgetdest, __strgetdest, __strmaxlength))
 // This is a macro not a stock because forwarding all variable parameters is not easy.  But would
 // look something like this, if there wasn't a bug with `SYSREQ.C` and otherwise unused natives:
 //stock strformat(dest[], size = sizeof (dest), bool:pack = true, const format[], {Float, _}:...)
