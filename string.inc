@@ -307,6 +307,16 @@ stock __strmaxlength;
 
 /**
  * <library>string</library>
+ * <remarks>
+ * This function exists to convert a string (<c>dest[]</c>) to its own address.  The address is
+ * passed to a special declaration of the native which takes a number instead of a string.  This
+ * essentially lies to the compiler and allows you to pass a string by address instead of having the
+ * compiler push the reference for you.  However, a tiny bit of assembly is required here just to
+ * bypass the other part of the compiler preventing you from getting addresses.
+ * <p/>
+ * It also takes the length, just so that a default value can be set on it and <c>_</c> given as the
+ * length parameter.
+ * </remarks>
  */
 stock __strsetdest(dest[], maxlength = sizeof (dest))
 {
@@ -318,6 +328,9 @@ stock __strsetdest(dest[], maxlength = sizeof (dest))
 
 /**
  * <library>string</library>
+ * <remarks>
+ * Exists purely to resolve a default value.
+ * </remarks>
  */
 stock bool:__strpacked(bool:pack = true)
 {
