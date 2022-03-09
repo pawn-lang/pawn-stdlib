@@ -487,3 +487,96 @@ forward bool:fmatch(name[], const pattern[], index = 0, size = sizeof (name));
  */
 forward bool:fmkdir(const name[]);
 
+/**
+ * <library>file</library>
+ * <summary>Deletes a key or a section from an INI file.</summary>
+ * <param name="filename">The name and path of the INI file.  If this parameter is not set, the
+ * function uses the default name <c>"config.ini"</c>.</param>
+ * <param name="section">The section from which to delete the key.  If this parameter is not set,
+ * the function stores the key/value pair outside any section.</param>
+ * <param name="key">The key to delete.  If this parameter is not set, the function deletes the entire section.</param>
+ * <remarks>
+ * If parameters <c>section</c> and <c>key</c> are both not set, the function deletes all keys that are outside any sections.
+ * </remarks>
+ * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
+ */
+stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = "")
+{
+	return false;
+}
+
+/**
+ * <library>file</library>
+ * <summary>Reads a text field from an INI file.</summary>
+ * <param name="filename">The name and path of the INI file.  If this parameter is not set, the
+ * function uses the default name <c>"config.ini"</c>.</param>
+ * <param name="section">The section to look for the key.  If this parameter is not set, the
+ * function reads the key outside any section.</param>
+ * <param name="key">The key whose value must be looked up.</param>
+ * <param name="value">The buffer into which to store the value.  If the key is not present in the
+ * appropriate section of the INI file, the contents of parameter <c>defvalue</c> is copied into
+ * this buffer.</param>
+ * <param name="size">The (maximum) size of the value array in cells. For a packed string, one cell
+ * holds multiple characters.</param>
+ * <param name="defvalue">The string to copy into parameter value in the case that the function
+ * cannot read the field from the INI file.</param>
+ * <param name="pack">If the pack parameter is false, the text is stored as an unpacked string and
+ * the function parses UTF-8 encoding. When reading text in a packed string, no UTF-8
+ * interpretation occurs.</param>
+ * <returns>The number of characters stored in parameter <c>value</c>.</returns>
+ */
+stock readcfg(const filename[] = "", const section[] = "", const key[], value[], size = sizeof (value), const defvalue[] = "", bool:pack = false)
+{
+	return 0;
+}
+
+/**
+ * <library>file</library>
+ * <summary>Reads a numeric field from an INI file.</summary>
+ * <param name="filename">The name and path of the INI file.  If this parameter is not set, the
+ * function uses the default name <c>"config.ini"</c>.</param>
+ * <param name="section">The section to look for the key.  If this parameter is not set, the
+ * function reads the key outside any section.</param>
+ * <param name="key">The key whose value must be looked up.</param>
+ * <param name="defvalue">The string to copy into parameter value in the case that the function
+ * cannot read the field from the INI file.</param>
+ * <returns>The numeric value if the field, or the value of <c>defvalue</c> if the field was not
+ * found in the section and/or at the key.</returns>
+ */
+stock readcfgvalue(const filename[] = "", const section[] = "", const key[], defvalue = 0)
+{
+	return defvalue;
+}
+
+/**
+ * <library>file</library>
+ * <summary>Writes a text field to an INI file.</summary>
+ * <param name="filename">The name and path of the INI file.  If this parameter is not set, the
+ * function uses the default name <c>"config.ini"</c>.</param>
+ * <param name="section">The section to store the key under. If this parameter is not set, the
+ * function stores the key/value pair outside any section.</param>
+ * <param name="key">The key for the field.</param>
+ * <param name="value">The value for the field.</param>
+ * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
+ */
+stock bool:writecfg(const filename[] = "", const section[] = "", const key[], const value[])
+{
+	return false;
+}
+
+/**
+ * <library>file</library>
+ * <summary>Writes a numeric field to an INI file.</summary>
+ * <param name="filename">The name and path of the INI file.  If this parameter is not set, the
+ * function uses the default name <c>"config.ini"</c>.</param>
+ * <param name="section">The section to store the key under. If this parameter is not set, the
+ * function stores the key/value pair outside any section.</param>
+ * <param name="key">The key for the field.</param>
+ * <param name="value">The value for the field, as a signed (decimal) number.</param>
+ * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
+ */
+stock bool:writecfgvalue(const filename[] = "", const section[] = "", const key[], value)
+{
+	return false;
+}
+
