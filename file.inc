@@ -644,11 +644,11 @@ stock readcfg(const filename[] = "", const section[] = "", const key[], value[],
 				}
 				if (pack)
 				{
-					strpack(value, __fbuf[keylen + 1], size)
+					strpack(value, __fbuf[keylen + 1], size);
 				}
 				else
 				{
-					strunpack(value, __fbuf[keylen + 1], size)
+					strunpack(value, __fbuf[keylen + 1], size);
 				}
 				fclose(i);
 				return min(len - keylen - 1, size - 1);
@@ -667,11 +667,11 @@ stock readcfg(const filename[] = "", const section[] = "", const key[], value[],
 	fclose(i);
 	if (pack)
 	{
-		strpack(value, defvalue, size)
+		strpack(value, defvalue, size);
 	}
 	else
 	{
-		strunpack(value, defvalue, size)
+		strunpack(value, defvalue, size);
 	}
 	return min(strlen(defvalue), size - 1);
 }
