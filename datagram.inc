@@ -36,7 +36,7 @@
  * <returns><b><c>1</c></b> on success, <b><c>0</c></b> on failure.</returns>
  */
 #pragma deprecated Just doesn't work.  Use `HTTP` or the "Requests" plugin.
-native sendstring(const message[], const destination[] = "");
+forward sendstring(const message[], const destination[] = "");
 
 /**
  * <library>datagram</library>
@@ -51,7 +51,7 @@ native sendstring(const message[], const destination[] = "");
  * <returns><b><c>1</c></b> on success, <b><c>0</c></b> on failure.</returns>
  */
 #pragma deprecated Just doesn't work.  Use `HTTP` or the "Requests" plugin.
-native sendpacket(const packet[], size, const destination[] = "");
+forward sendpacket(const packet[], size, const destination[] = "");
 
 /**
  * <library>datagram</library>
@@ -67,7 +67,7 @@ native sendpacket(const packet[], size, const destination[] = "");
  * <returns>This function always returns <b><c>0</c></b>.</returns>
  */
 #pragma deprecated Just doesn't work.  Use the "Requests" plugin.
-native listenport(port);
+forward listenport(port);
 
 /**
  * <summary>A packed was received.</summary>
