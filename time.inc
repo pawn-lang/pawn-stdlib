@@ -133,3 +133,115 @@ stock delay(milliseconds)
 	return 0;
 }
 
+/**
+ * <library>time</library>
+ * <summary>Convert a time-stamp into a date and time.</summary>
+ * <param name="year">This will hold the year upon return.</param>
+ * <param name="month">This will hold the month (1–12) upon return.</param>
+ * <param name="day">This will hold the day of (1–31) the month upon return.</param>
+ * <param name="hour">This will hold the hour (0–23) upon return.</param>
+ * <param name="minute">This will hold the minute (0–59) upon return.</param>
+ * <param name="second">This will hold the second (0–59) upon return.</param>
+ * <remarks>
+ * Some file and system functions return time-stamps as the number of seconds since midnight, 1
+ * January 1970, which is the start of the UNIX system epoch.  This function allows to convert these
+ * time stamps into date and time fields.
+ * </remarks>
+ * <returns>This function always returns 0.</returns>
+ */
+stock cvttimestamp(seconds1970, &year = 0, &month = 0, &day = 0, &hour = 0, &minute = 0, &second = 0)
+{
+	// Based on the amxtime.c code, with the same bugs...
+	new days, seconds;
+	static monthdays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+	// Find the year
+	for (year = 1970; ; ++year)
+	{
+		// Leap year check, fails for 2100.  Please don't be still using this code in 2100...
+		days = 365 + ((year & 0x03) == 0);
+		seconds = days * 86400;
+		if (seconds - seconds1970 > 0)
+		{
+			break;
+		}
+		seconds1970 -= seconds;
+	}
+	
+	// Find the month.
+	for (month = 1; ; ++month)
+	{
+		days = monthdays[month - 1];
+		seconds = days * 86400;
+		if (seconds - seconds1970 > 0)
+		{
+			break;
+		}
+		seconds1970 -= seconds;
+	}
+
+	// Find the day.
+	for (day = 1; seconds1970 >= 86400; ++day)
+	{
+		seconds1970 -= 86400;
+	}
+
+	// Find the hour.
+	for (hour = 0; seconds1970 >= 3600; ++hour)
+	{
+		seconds1970 -= 3600;
+	}
+
+	// Find the minute.
+	for (minute = 0; seconds1970 >= 60; ++minute)
+	{
+		seconds1970 -= 60;
+	}
+
+	// Remainder is the number of seconds.
+	second = seconds1970;
+
+	return 0;
+}
+
+/**
+ * <library>time</library>
+ * <summary>Set the system date.</summary>
+ * <param name="year">The year to set; if set to <c>"cellmin"</c>, the default value, it is ignored.</param>
+ * <param name="month">The month to set; if set to <c>"cellmin"</c>, the default value, it is ignored.</param>
+ * <param name="day">The day to set; if set to <c>"cellmin"</c>, the default value, it is ignored.</param>
+ * <returns>This function always returns 0.</returns>
+ * <remarks>The date fields are kept in a valid range.  For example, when setting the month to 13,
+ * it wraps back to 1 - this is always wrapped to the min/max, not modulo.</remarks>
+ */
+forward setdate(year = cellmin, month = cellmin, day = cellmin);
+
+/**
+ * <library>time</library>
+ * <summary>Set the system time.</summary>
+ * <param name="hour">The hour to set, in the range 0-23; if set to <c>"cellmin"</c>, the default value, it is ignored.</param>
+ * <param name="minute">The minute to set, in the range 0-59; if set to <c>"cellmin"</c>, the default value, it is ignored.</param>
+ * <param name="second">The second to set, in the range 0-59; if set to <c>"cellmin"</c>, the default value, it is ignored.</param>
+ * <returns>This function always returns 0.</returns>
+ * <remarks>The time fields are kept in a valid range.  For example, when setting the hour to 24, it
+ * wraps back to 0 - this is always wrapped to the min/max, not modulo.</remarks>
+ */
+forward settime(hour = cellmin, minute = cellmin, second = cellmin);
+
+/**
+ * <library>time</library>
+ * <summary>Sets the date and time with a single value.</summary>
+ * <param name="seconds1970">The number of seconds that have elapsed since 00:00 hours, 1 January
+ * 1970.  This particular date, 1 January 1970, is the <em>UNIX system epoch</em>.</param>
+ * <returns>This function always returns 0.</returns>
+ * <remarks>The function <c>getdate</c> returns the number of seconds since 1 January 1970.</remarks>
+ */
+stock settimestamp(seconds1970)
+{
+	new year, month, day, hour, minute, second;
+	cvttimestamp(seconds1970, year, month, day, hour, minute, second);
+	setdate(year, month, day);
+	settime(hour, minute, second);
+	return 0;
+}
+
