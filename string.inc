@@ -335,18 +335,26 @@ stock bool:__strpacked(bool:pack = true)
  * <remarks>
  * The format parameter is a string that may contain embedded placeholder codes:
  * <ul>
- * <li><c>%c</c>store a character at this position</li>
- * <li><c>%d</c>store a number at this position in decimal radix</li>
- * <li><c>%f</c>store a floating point number at this position (for implementations that support floating point)</li>
- * <li><c>%q</c>store a fixed point number at this position</li>
- * <li><c>%r</c>same as either <c>%f</c> or <c>%q</c> (for compatibility with other implementations of PAWN)</li>
- * <li><c>%s</c>store a character string at this position</li>
- * <li><c>%x</c>store a number at this position in hexadecimal radix</li>
+ * <li><c>%b</c> - store a number at this position in binary radix</li>
+ * <li><c>%c</c> - store a character at this position</li>
+ * <li><c>%d</c> - store a number at this position in decimal radix (same as <c>%i</c>)</li>
+ * <li><c>%i</c> - store a number at this position in decimal radix (same as <c>%d</c>)</li>
+ * <li><c>%f</c> - store a floating point number at this position</li>
+ * <li><c>%s</c> - store a character string at this position</li>
+ * <li><c>%x</c> - store a number at this position in hexadecimal radix</li>
+ * <li><c>%q</c> - store a string with special characters escaped for SQLite</li>
+ * <li><c>%%</c> - store a literal <c>%</c></li>
  * The values for the placeholders follow as parameters in the call.
  * <p/>
  * You may optionally put a number between the <c>"%"</c> and the letter of the placeholder code.
  * This number indicates the field width; if the size of the parameter to print at the position of
- * the placeholder is smaller than the field width, the field is expanded with spaces.
+ * the placeholder is smaller than the field width, the field is expanded with spaces.  A negative
+ * number left-aligns the text (right-pads).
+ * <p/>
+ * You may optionally put a <c>.</c> followed by a number between the <c>"%"</c> and the letter of
+ * the placeholder code, after the optional width.  This number indicates the field precision; it
+ * will truncate the output in some way.  For <c>%f</c> this is the number of decimal points to
+ * show, for <c>%s</c> it is the number of characters to show.
  * <p/>
  * The <c>strformat</c> function works similarly to the "C" function sprintf.
  * </remarks>
