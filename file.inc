@@ -610,7 +610,7 @@ stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = 
  */
 stock readcfg(const filename[] = "", const section[] = "", const key[], value[], size = sizeof (value), const defvalue[] = "", bool:pack = false)
 {
-		static const configini[] = "config.ini";
+	static const configini[] = "config.ini";
 	// Open the cfg file, and a temp file for swap space.
 	new File:i = fopen(filename[0] ? filename : configini, io_read);
 	if (!i)
