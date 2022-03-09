@@ -334,7 +334,7 @@ static stock bool:__fpartialcopy(File:i, end, const newname[])
 	{
 		fputchar(o, fgetchar(i, false), false);
 	}
-	return fclose(i);
+	return fclose(o);
 }
 
 /**
@@ -515,6 +515,11 @@ static stock const __cfgdefault[] = "config.ini";
 
 /**
  * <library>file</library>
+ */
+static stock const __ftemp[] = "__ftemp";
+
+/**
+ * <library>file</library>
  * <summary>Deletes a key or a section from an INI file.</summary>
  * <param name="filename">The name and path of the INI file.  If this parameter is not set, the
  * function uses the default name <c>"config.ini"</c>.</param>
@@ -534,7 +539,7 @@ stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = 
 	{
 		return false;
 	}
-	new File:o = ftemp();
+	new File:o = fopen(__ftemp, io_write);
 	if (!o)
 	{
 		fclose(i);
@@ -544,8 +549,7 @@ stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = 
 	new sectionlen = strlen(section);
 	new keylen = strlen(key);
 	new bool:insection = sectionlen == 0;
-	new len;
-	while ((len = fread(i, __fbuf)))
+	while (fread(i, __fbuf))
 	{
 		if (insection)
 		{
@@ -586,13 +590,22 @@ stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = 
 	fclose(i);
 	if (fremove(filename[0] ? filename : __cfgdefault))
 	{
-		len = ftell(o);
-		fseek(o);
-		insection = __fpartialcopy(o, len, filename[0] ? filename : __cfgdefault);
 		fclose(o);
+		if ((o = fopen(__ftemp, io_read)))
+		{
+			fseek(o, 0, seek_start);
+			insection = __fpartialcopy(o, flength(o), filename[0] ? filename : __cfgdefault);
+			fclose(o);
+		}
+		else
+		{
+			insection = false;
+		}
+		fremove(__ftemp);
 		return insection;
 	}
 	fclose(o);
+	fremove(__ftemp);
 	return false;
 }
 
@@ -743,7 +756,7 @@ stock bool:writecfg(const filename[] = "", const section[] = "", const key[], co
 	{
 		return false;
 	}
-	new File:o = ftemp();
+	new File:o = fopen(__ftemp, io_write);
 	if (!o)
 	{
 		fclose(i);
@@ -754,8 +767,7 @@ stock bool:writecfg(const filename[] = "", const section[] = "", const key[], co
 	new keylen = strlen(key);
 	new bool:insection = sectionlen == 0;
 	new bool:written = false;
-	new len;
-	while ((len = fread(i, __fbuf)))
+	while (fread(i, __fbuf))
 	{
 		if (insection)
 		{
@@ -830,13 +842,22 @@ stock bool:writecfg(const filename[] = "", const section[] = "", const key[], co
 	}
 	if (fremove(filename[0] ? filename : __cfgdefault))
 	{
-		len = ftell(o);
-		fseek(o);
-		insection = __fpartialcopy(o, len, filename[0] ? filename : __cfgdefault);
 		fclose(o);
+		if ((o = fopen(__ftemp, io_read)))
+		{
+			//fseek(o, 0, seek_start);
+			insection = __fpartialcopy(o, flength(o), filename[0] ? filename : __cfgdefault);
+			fclose(o);
+		}
+		else
+		{
+			insection = false;
+		}
+		fremove(__ftemp);
 		return insection;
 	}
 	fclose(o);
+	fremove(__ftemp);
 	return false;
 }
 
