@@ -292,6 +292,15 @@ stock bool:fstat(const name[], &size = 0, &timestamp = 0, &attrib = 0, &inode = 
 	return false;
 }
 
+#if !defined FCFG_MAX_LINE_LENGTH
+	#define FCFG_MAX_LINE_LENGTH (256)
+#endif
+
+/**
+ * <library>file</library>
+ */
+static stock __fbuf[FCFG_MAX_LINE_LENGTH];
+
 /**
  * <library>file</library>
  */
@@ -303,10 +312,8 @@ static stock bool:__fpartialcopy(File:i, end, const newname[])
 	{
 		return false;
 	}
-	// Create a byte buffer for the data.
-	new buffer[256];
 	// Clamp the read size to the number of cells in the file.
-	new count = min(sizeof (buffer), end / cellbytes);
+	new count = min(sizeof (__fbuf), end / cellbytes);
 	// The last few bytes.
 	end &= cellbytes - 1;
 	// Only loop as long as we read a full block.  Partials mean the end.  Might
@@ -314,10 +321,10 @@ static stock bool:__fpartialcopy(File:i, end, const newname[])
 	// files less than 4 bytes long and doesn't matter anyway.
 	do
 	{
-		count = fblockread(i, buffer, count);
-		fblockwrite(o, buffer, count);
+		count = fblockread(i, __fbuf, count);
+		fblockwrite(o, __fbuf, count);
 	}
-	while (count == sizeof (buffer));
+	while (count == sizeof (__fbuf));
 	// Clean up any trailing bytes.
 	while (end--)
 	{
@@ -497,8 +504,6 @@ forward bool:fmatch(name[], const pattern[], index = 0, size = sizeof (name));
  */
 forward bool:fmkdir(const name[]);
 
-#if !defined FCFG_MAX_LINE_LENGTH (256)
-
 /**
  * <library>file</library>
  * <summary>Deletes a key or a section from an INI file.</summary>
@@ -530,44 +535,43 @@ stock bool:deletecfg(const filename[] = "", const section[] = "", const key[] = 
 	// Max line length.
 	new sectionlen = strlen(section);
 	new keylen = strlen(key);
-	new line[FCFG_MAX_LINE_LENGTH];
 	new bool:insection = sectionlen == 0;
 	new len;
-	while ((len = fread(i, line)))
+	while ((len = fread(i, __fbuf)))
 	{
 		if (insection)
 		{
-			if (line[0] == '[')
+			if (__fbuf[0] == '[')
 			{
 				// New section, so the end of the old one.
 				insection = false;
-				fwrite(o, line);
+				fwrite(o, __fbuf);
 			}
-			else if (keylen && !(strcmp(line, key, false, keylen) == 0 && (line[keylen] == ':' || line[keylen] == '=')))
+			else if (keylen && !(strcmp(__fbuf, key, false, keylen) == 0 && (__fbuf[keylen] == ':' || __fbuf[keylen] == '=')))
 			{
 				// This isn't the key we're deleting.  I could use DeMorgan on the line above, but
 				// I think it is clearer this way.  It checks that the key isn't an exact match.
-				fwrite(o, line);
+				fwrite(o, __fbuf);
 			}
 			// Else don't copy this line.
 		}
 		else
 		{
 			// Not in a section before, are we now?
-			if (sectionlen && (line[0] == '[' && strcmp(line[1], section, false, sectionlen) == 0 && line[sectionlen + 1] == ']'))
+			if (sectionlen && (__fbuf[0] == '[' && strcmp(__fbuf[1], section, false, sectionlen) == 0 && __fbuf[sectionlen + 1] == ']'))
 			{
 				// New correct section.
 				insection = true;
 				if (keylen)
 				{
 					// Not deleting the section, so keep the header.
-					fwrite(o, line);
+					fwrite(o, __fbuf);
 				}
 			}
 			else
 			{
 				// Not in the correct section, so keep the line.
-				fwrite(o, line);
+				fwrite(o, __fbuf);
 			}
 		}
 	}
@@ -616,32 +620,31 @@ stock readcfg(const filename[] = "", const section[] = "", const key[], value[],
 	// Max line length.
 	new sectionlen = strlen(section);
 	new keylen = strlen(key);
-	new line[FCFG_MAX_LINE_LENGTH];
 	new bool:insection = sectionlen == 0;
 	new len;
-	while ((len = fread(i, line)))
+	while ((len = fread(i, __fbuf)))
 	{
 		if (insection)
 		{
-			if (line[0] == '[')
+			if (__fbuf[0] == '[')
 			{
 				// The correction section ended, so we didn't find the value.
 				break;
 			}
-			else if (strcmp(line, key, false, keylen) == 0 && (line[keylen] == ':' || line[keylen] == '='))
+			else if (strcmp(__fbuf, key, false, keylen) == 0 && (__fbuf[keylen] == ':' || __fbuf[keylen] == '='))
 			{
 				// Found the value.  Remove the newline characters.
-				while (line[--len] <= ' ')
+				while (__fbuf[--len] <= ' ')
 				{
-					line[len] = '\0';
+					__fbuf[len] = '\0';
 				}
 				if (pack)
 				{
-					strpack(value, line[keylen + 1], size)
+					strpack(value, __fbuf[keylen + 1], size)
 				}
 				else
 				{
-					strunpack(value, line[keylen + 1], size)
+					strunpack(value, __fbuf[keylen + 1], size)
 				}
 				fclose(i);
 				return min(len - keylen - 1, size - 1);
@@ -650,7 +653,7 @@ stock readcfg(const filename[] = "", const section[] = "", const key[], value[],
 		else
 		{
 			// Not in a section before, are we now?
-			if (sectionlen && (line[0] == '[' && strcmp(line[1], section, false, sectionlen) == 0 && line[sectionlen + 1] == ']'))
+			if (sectionlen && (__fbuf[0] == '[' && strcmp(__fbuf[1], section, false, sectionlen) == 0 && __fbuf[sectionlen + 1] == ']'))
 			{
 				// New correct section.
 				insection = true;
@@ -722,15 +725,14 @@ stock bool:writecfg(const filename[] = "", const section[] = "", const key[], co
 	// Max line length.
 	new sectionlen = strlen(section);
 	new keylen = strlen(key);
-	new line[FCFG_MAX_LINE_LENGTH];
 	new bool:insection = sectionlen == 0;
 	new bool:written = false;
 	new len;
-	while ((len = fread(i, line)))
+	while ((len = fread(i, __fbuf)))
 	{
 		if (insection)
 		{
-			if (line[0] == '[')
+			if (__fbuf[0] == '[')
 			{
 				if (!written)
 				{
@@ -743,9 +745,9 @@ stock bool:writecfg(const filename[] = "", const section[] = "", const key[], co
 				}
 				// New section, so the end of the old one.
 				insection = false;
-				fwrite(o, line);
+				fwrite(o, __fbuf);
 			}
-			else if (strcmp(line, key, false, keylen) == 0 && (line[keylen] == ':' || line[keylen] == '='))
+			else if (strcmp(__fbuf, key, false, keylen) == 0 && (__fbuf[keylen] == ':' || __fbuf[keylen] == '='))
 			{
 				if (!written)
 				{
@@ -760,26 +762,26 @@ stock bool:writecfg(const filename[] = "", const section[] = "", const key[], co
 			else
 			{
 				// Else copy this line.
-				fwrite(o, line);
+				fwrite(o, __fbuf);
 			}
 		}
 		else
 		{
 			// Not in a section before, are we now?
-			if (sectionlen && (line[0] == '[' && strcmp(line[1], section, false, sectionlen) == 0 && line[sectionlen + 1] == ']'))
+			if (sectionlen && (__fbuf[0] == '[' && strcmp(__fbuf[1], section, false, sectionlen) == 0 && __fbuf[sectionlen + 1] == ']'))
 			{
 				// New correct section.
 				insection = true;
 				if (keylen)
 				{
 					// Not deleting the section, so keep the header.
-					fwrite(o, line);
+					fwrite(o, __fbuf);
 				}
 			}
 			else
 			{
 				// Not in the correct section, so keep the line.
-				fwrite(o, line);
+				fwrite(o, __fbuf);
 			}
 		}
 	}
