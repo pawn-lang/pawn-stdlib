@@ -60,10 +60,10 @@ native bool:argindex(index, value[], size = sizeof (value), bool:pack = false);
  * <seealso name="argindex"/>
  * <seealso name="argvalue"/>
  * <remarks>This only returns <c>true</c> if the argument name is found AND it is followed by a
- * value separated by only <c>=</c> or <c>:</c>.  For example <c>--arg=7</c> or <c>-a:5</c>.  It
- * does not handle long-form arguments with separated parameters such as <c>--arg hello</c> nor
- * short-form arguments collected together, such as <c>-xvf</c>.  For those a higher-level library
- * such as <c>&lt;YSI_Server\y_args&gt;</c> is required.</remarks>
+ * value separated by <c>=</c>.  For example <c>--arg=7</c> or <c>-a=5</c>.  It does not handle
+ * long-form arguments with separated parameters such as <c>--arg hello</c> nor short-form arguments
+ * collected together, such as <c>-xvf</c>.  For those a higher-level library such as
+ * <c>&lt;YSI_Server\y_args&gt;</c> is required.</remarks>
  * <remarks>Values may include spaces when enclosed in double quotes, for example:
  * <c>"--motd=Hello and welcome to my server!"</c>.</remarks>
  * <return><c>true</c> - the argument was found with value, <c>false</c> - it wasn't.</return>
@@ -81,10 +81,10 @@ native bool:argstr(skip = 0, const argument[] = "", value[] = "", size = sizeof 
  * <seealso name="argindex"/>
  * <seealso name="argstr"/>
  * <remarks>This only returns <c>true</c> if the argument name is found AND it is followed by a
- * value separated by only <c>=</c> or <c>:</c>.  For example <c>--arg=7</c> or <c>-a:5</c>.  It
- * does not handle long-form arguments with separated parameters such as <c>--arg hello</c> nor
- * short-form arguments collected together, such as <c>-xvf</c>.  For those a higher-level library
- * such as <c>&lt;YSI_Server\y_args&gt;</c> is required.</remarks>
+ * value separated by <c>=</c>.  For example <c>--arg=7</c> or <c>-a=5</c>.  It does not handle
+ * long-form arguments with separated parameters such as <c>--arg hello</c> nor short-form arguments
+ * collected together, such as <c>-xvf</c>.  For those a higher-level library such as
+ * <c>&lt;YSI_Server\y_args&gt;</c> is required.</remarks>
  * <return><c>true</c> - the argument was found with value, <c>false</c> - it wasn't.</return>
  */
 native bool:argvalue(skip = 0, const argument[] = "", &value = cellmin);
