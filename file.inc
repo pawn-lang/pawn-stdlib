@@ -18,13 +18,14 @@
  * </library>
  */
 
+/// <p/>
+
 #include "core"
 #include "string"
 
 #pragma library File
 
 /// <p/>
-
 /**
  * <library>file</library>
  */
@@ -38,7 +39,6 @@ enum filemode
 static stock filemode:_@filemode() { return filemode; }
 
 /// <p/>
-
 /**
  * <library>file</library>
  */
@@ -58,7 +58,7 @@ const EOF = -1;
 /**
  * <library>file</library>
  * <summary>Open a file (to read from or write to).</summary>
- * <param name="name">The path to the file to open (if just a filename is specified, it will open the
+ * <param name="filename">The path to the file to open (if just a filename is specified, it will open the
  * file with the name specified in the 'scriptfiles' folder)</param>
  * <param name="mode">The mode to open the file with, see below (optional=<b><c>io_readwrite</c></b>)</param>
  * <remarks>This function can't access files outside the 'scriptfiles' folder!</remarks>
@@ -78,7 +78,7 @@ const EOF = -1;
  * <returns>Returns the file handle.  This handle is used for reading and writing. <b><c>0</c></b> if
  * failed to open file.</returns>
  */
-native File:fopen(const name[], filemode:mode = io_readwrite);
+native File:fopen(const filename[], filemode:mode = io_readwrite);
 
 /**
  * <library>file</library>
@@ -107,7 +107,7 @@ native File:ftemp();
 /**
  * <library>file</library>
  * <summary>Delete a file.</summary>
- * <param name="name">The <b>path</b> of the file to delete. (NOTE: NOT a file handle)</param>
+ * <param name="filename">The <b>path</b> of the file to delete. (NOTE: NOT a file handle)</param>
  * <remarks>The file path must be valid.</remarks>
  * <remarks>Files that are currently open (<a href="#fopen">fopen</a>) must be closed first (<a href="#fclose">fclose</a>)
  * to be deleted.</remarks>
@@ -117,7 +117,7 @@ native File:ftemp();
  * permission to delete it.
  * </returns>
  */
-native bool:fremove(const name[]);
+native bool:fremove(const filename[]);
 
 /**
  * <library>file</library>
@@ -258,15 +258,15 @@ native flength(File:handle);
 /**
  * <library>file</library>
  * <summary>Checks if a specific file exists in the <b><c>/scriptfiles</c></b> directory.</summary>
- * <param name="name">The name of the file</param>
+ * <param name="filename">The name of the file</param>
  * <returns>1 if the file exists, 0 otherwise.</returns>
  */
-native fexist(const name[]);
+native fexist(const filename[]);
 
 /**
  * <library>file</library>
  * <summary>Return the size and the time stamp of a file.</summary>
- * <param name="name">The name of the file.</param>
+ * <param name="filename">The name of the file.</param>
  * <param name="size">If the function is successful, this param-eter holds the size of the file on return.</param>
  * <param name="timestamp">If the function is successful, this parameter holds the time of the last modification of the file on return.</param>
  * <param name="attrib">If the function is successful, this parameter holds the file attributes.</param>
@@ -280,7 +280,7 @@ native fexist(const name[]);
  * </remarks>
  * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
  */
-stock bool:fstat(const name[], &size = 0, &timestamp = 0, &attrib = 0, &inode = 0)
+stock bool:fstat(const filename[], &size = 0, &timestamp = 0, &attrib = 0, &inode = 0)
 {
 	// Not supported.
 	timestamp = 0;
@@ -397,7 +397,7 @@ stock bool:fcopy(const source[], const target[])
 /**
  * <library>file</library>
  * <summary>Return the 32-bit CRC value of a file.</summary>
- * <param name="name">The name of the file.</param>
+ * <param name="filename">The name of the file.</param>
  * <remarks>
  * The CRC value is a useful measure to check whether the contents of a file has changed during
  * transmission or whether it has been edited (provided that the CRC value of the original file was
@@ -406,7 +406,7 @@ stock bool:fcopy(const source[], const target[])
  * </remarks>
  * <returns>The 32-bit CRC value of the file, or zero if the file cannot be opened.</returns>
  */
-stock filecrc(const name[])
+stock filecrc(const filename[])
 {
 	static crctable[256] = {
 		0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA, 0x076DC419, 0x706AF48F, 0xE963A535, 0x9E6495A3,
@@ -473,7 +473,7 @@ forward diskfree(const volume[] = "");
 /**
  * <library>file</library>
  * <summary>Set the file attributes.</summary>
- * <param name="name">The name of the file.</param>
+ * <param name="filename">The name of the file.</param>
  * <param name="timestamp">Time of the last modification of the file.  When this parameter is set to zero, the time stamp of the file is not changed.</param>
  * <param name="attrib">A bit mask with the new attributes of the file.  When set to 0x0F, the attributes of the file are not changed.</param>
  * <remarks>
@@ -483,30 +483,30 @@ forward diskfree(const volume[] = "");
  * </remarks>
  * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
  */
-forward bool:fattrib(const name[], timestamp = 0, attrib = 0x0F);
+forward bool:fattrib(const filename[], timestamp = 0, attrib = 0x0F);
 
 /**
  * <library>file</library>
  * <summary>Find a filename matching a pattern.</summary>
- * <param name="name">The string to hold the result in, returned as a packed string</param>
+ * <param name="filename">The string to hold the result in, returned as a packed string</param>
  * <param name="pattern">The pattern that should be matched.  May contain wildcards</param>
  * <param name="index">The number of the file, in case there are multiple matches (optional=<b><c>0</c></b>)</param>
  * <param name="size">The maximum size of parameter name (optional=<b><c>sizeof (name)</c></b>)</param>
  * <remarks>This function does not work in the current SA:MP version!</remarks>
  * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
  */
-forward bool:fmatch(name[], const pattern[], index = 0, size = sizeof (name));
+forward bool:fmatch(filename[], const pattern[], index = 0, size = sizeof (name));
 
 /**
  * <library>file</library>
  * <summary>Create a directory.</summary>
- * <param name="name">The name of the directory to create, optionally including a full path.</param>
+ * <param name="filename">The name of the directory to create, optionally including a full path.</param>
  * <remarks>
  * To delete the directory again, use <c>fremove</c>.  The directory must be empty before it can be removed.
  * </remarks>
  * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
  */
-forward bool:fmkdir(const name[]);
+forward bool:fmkdir(const filename[]);
 
 /**
  * <library>file</library>
