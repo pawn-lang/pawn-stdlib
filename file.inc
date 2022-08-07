@@ -495,7 +495,7 @@ forward bool:fattrib(const filename[], timestamp = 0, attrib = 0x0F);
  * <remarks>This function does not work in the current SA:MP version!</remarks>
  * <returns><b><c>true</c></b> on success, <b><c>false</c></b> on failure.</returns>
  */
-forward bool:fmatch(filename[], const pattern[], index = 0, size = sizeof (name));
+forward bool:fmatch(filename[], const pattern[], index = 0, size = sizeof (filename));
 
 /**
  * <library>file</library>
