@@ -30,7 +30,7 @@
  * <seealso name="argvalue"/>
  * <return>The number of arguments passed directly to the script.</return>
  */
-native argcount();
+forward argcount();
 
 /**
  * <library>args</library>
@@ -46,7 +46,7 @@ native argcount();
  * <c>--load test --run</c> the argument <c>--run</c> is index <c>2</c>.</remarks>
  * <return><c>true</c> - the argument was found, <c>false</c> - it wasn't.</return>
  */
-native bool:argindex(index, value[], size = sizeof (value), bool:pack = false);
+forward bool:argindex(index, value[], size = sizeof (value), bool:pack = false);
 
 /**
  * <library>args</library>
@@ -68,7 +68,7 @@ native bool:argindex(index, value[], size = sizeof (value), bool:pack = false);
  * <c>"--motd=Hello and welcome to my server!"</c>.</remarks>
  * <return><c>true</c> - the argument was found with value, <c>false</c> - it wasn't.</return>
  */
-native bool:argstr(skip = 0, const argument[] = "", value[] = "", size = sizeof (value), bool:pack = false);
+forward bool:argstr(skip = 0, const argument[] = "", value[] = "", size = sizeof (value), bool:pack = false);
 
 /**
  * <library>args</library>
@@ -87,5 +87,5 @@ native bool:argstr(skip = 0, const argument[] = "", value[] = "", size = sizeof 
  * <c>&lt;YSI_Server\y_args&gt;</c> is required.</remarks>
  * <return><c>true</c> - the argument was found with value, <c>false</c> - it wasn't.</return>
  */
-native bool:argvalue(skip = 0, const argument[] = "", &value = cellmin);
+forward bool:argvalue(skip = 0, const argument[] = "", &value = cellmin);
 
