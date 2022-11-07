@@ -357,6 +357,7 @@ stock bool:__strpacked(bool:pack = true)
  * <li><c>%x</c> - store a number at this position in hexadecimal radix</li>
  * <li><c>%q</c> - store a string with special characters escaped for SQLite</li>
  * <li><c>%%</c> - store a literal <c>%</c></li>
+ * </ul>
  * The values for the placeholders follow as parameters in the call.
  * <p/>
  * You may optionally put a number between the <c>"%"</c> and the letter of the placeholder code.
@@ -388,6 +389,7 @@ static stock strformat(dest[], size = sizeof (dest), bool:pack = true, const for
 //stock strformat(dest[], size = sizeof (dest), bool:pack = true, const format[], {Float, _}:...)
 //{
 //	static ret;
+//	const minus4 = 0xFFFFFFFC;
 //	#emit LOAD.S.pri       16
 //	#emit LOAD.S.pri       20
 //	#emit POP.alt
@@ -395,7 +397,7 @@ static stock strformat(dest[], size = sizeof (dest), bool:pack = true, const for
 //	#emit POP.pri
 //	#emit STOR.pri         ret
 //	#emit POP.pri
-//	#emit ADD.C            0xFFFFFFFC
+//	#emit ADD.C            minus4
 //	#emit POP.alt
 //	#emit SWAP.alt
 //	#emit PUSH.pri
